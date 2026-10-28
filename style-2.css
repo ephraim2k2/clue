@@ -1,0 +1,960 @@
+/* ==========================================================================
+   CLUE • EMERALD FOREST DESIGN SYSTEM (INDEX 2)
+   Single Viewport 100vh Experience:
+   Top Navbar + Split Hero + Organic Wave + White Value Props At A Glance
+   ========================================================================== */
+
+:root {
+  /* Typography */
+  --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-hero: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+
+  /* Emerald Color Palette */
+  --bg-deep-forest: #022319;
+  --bg-emerald-dark: #032b1e;
+  --bg-emerald-mid: #064e3b;
+  --emerald-glow: #10b981;
+  --neon-lime: #4ade80;
+  --neon-lime-hover: #22c55e;
+  --neon-lime-light: #86efac;
+  --mint-soft: #d1fae5;
+  --text-white: #ffffff;
+  --text-dim: rgba(255, 255, 255, 0.78);
+  --text-muted: rgba(255, 255, 255, 0.55);
+
+  /* Glassmorphism */
+  --glass-dark: rgba(2, 38, 28, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-border-emerald: rgba(52, 211, 153, 0.35);
+
+  /* Card Gradients */
+  --card-oldman-grad: linear-gradient(180deg, #b45309 0%, #d97706 35%, #78350f 100%);
+  --card-seer-grad: linear-gradient(180deg, #4338ca 0%, #6366f1 35%, #1e1b4b 100%);
+  --card-werewolf-grad: linear-gradient(180deg, #ea580c 0%, #f97316 40%, #c2410c 100%);
+  --card-witch-grad: linear-gradient(180deg, #047857 0%, #10b981 35%, #064e3b 100%);
+  --card-hunter-grad: linear-gradient(180deg, #0284c7 0%, #0ea5e9 35%, #0369a1 100%);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-main);
+  background-color: var(--bg-deep-forest);
+  color: var(--text-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background-color: var(--bg-deep-forest);
+  background-image: 
+    radial-gradient(circle at 68% 40%, rgba(16, 185, 129, 0.4) 0%, rgba(5, 78, 54, 0.22) 42%, transparent 68%),
+    radial-gradient(circle at 18% 25%, rgba(4, 120, 87, 0.22) 0%, transparent 45%),
+    linear-gradient(180deg, #022017 0%, #032b1e 40%, #043828 75%, #02241a 100%);
+  background-attachment: fixed;
+}
+
+/* Zero Shadow Standard */
+*, *::before, *::after {
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   Master 100vh Viewport Layout Container (At A Glance)
+   ========================================================================== */
+.landing-viewport {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+@media (min-height: 700px) and (min-width: 900px) {
+  html, body {
+    height: 100vh;
+    overflow: hidden;
+  }
+  .landing-viewport {
+    height: 100vh;
+    max-height: 100vh;
+  }
+}
+
+/* Ambient Floating Background Scene */
+.ambient-bg-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Floating 3D Origami Book */
+.float-book {
+  position: absolute;
+  top: 10%;
+  right: 48%;
+  width: 58px;
+  height: 44px;
+  animation: floatBook 6.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 14px rgba(52, 211, 153, 0.4));
+}
+
+@keyframes floatBook {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50% { transform: translateY(-12px) rotate(4deg); }
+}
+
+/* Sparkles */
+.sparkle {
+  position: absolute;
+  color: #fbbf24;
+  font-size: 18px;
+  line-height: 1;
+  animation: pulseSparkle 4s ease-in-out infinite;
+}
+
+.sparkle-1 { top: 14%; right: 19%; font-size: 16px; animation-delay: 0s; }
+.sparkle-2 { top: 52%; right: 4%; font-size: 20px; animation-delay: 1.8s; }
+.sparkle-3 { top: 28%; left: 38%; font-size: 14px; opacity: 0.7; animation-delay: 2.5s; }
+
+@keyframes pulseSparkle {
+  0%, 100% { transform: scale(0.85); opacity: 0.45; }
+  50% { transform: scale(1.25); opacity: 1; }
+}
+
+/* Floating Gold Coin */
+.float-gold-coin {
+  position: absolute;
+  top: 14%;
+  right: 14%;
+  width: 38px;
+  height: 38px;
+  animation: floatCoin 5.5s ease-in-out infinite;
+}
+
+@keyframes floatCoin {
+  0%, 100% { transform: translateY(0) rotate(8deg); }
+  50% { transform: translateY(-10px) rotate(-6deg); }
+}
+
+/* Floating Clue 3D Cube / Owl App Icon */
+.float-clue-cube {
+  position: absolute;
+  top: 12%;
+  right: 4%;
+  width: 50px;
+  height: 50px;
+  animation: floatCube 7s ease-in-out infinite;
+}
+
+@keyframes floatCube {
+  0%, 100% { transform: translateY(0) rotate(12deg) scale(1); }
+  50% { transform: translateY(-14px) rotate(-8deg) scale(1.05); }
+}
+
+/* ==========================================================================
+   Top Navigation Bar
+   ========================================================================== */
+.top-nav-wrapper {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  padding: 16px 48px 0 48px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+/* Logo */
+.clue-brand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0;
+}
+
+.clue-logo-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.clue-logo-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.clue-brand-text {
+  font-family: var(--font-hero);
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: 0.8px;
+  color: #ffffff;
+}
+
+/* Nav Menu Links */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.nav-item {
+  position: relative;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 0.2s ease;
+}
+
+.nav-item:hover {
+  color: #ffffff;
+}
+
+.nav-item.active {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background: var(--neon-lime);
+  border-radius: 4px;
+}
+
+/* Nav Right */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Coins Pill */
+.coins-capsule {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(2, 44, 32, 0.7);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  backdrop-filter: blur(12px);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.coins-capsule:hover {
+  transform: scale(1.03);
+}
+
+.coin-star-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.coins-val {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
+/* Sign In Button */
+.btn-signin {
+  background: rgba(2, 44, 32, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 18px;
+  border-radius: 9999px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.btn-signin:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Sign Up Button */
+.btn-signup {
+  background: var(--neon-lime);
+  border: none;
+  color: #022319;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-signup:hover {
+  background: var(--neon-lime-hover);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Hero Split 2-Column Section (Compact 100vh Proportions)
+   ========================================================================== */
+.hero-content-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 4px 48px 0 48px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.hero-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.18fr;
+  align-items: center;
+  gap: 28px;
+  width: 100%;
+}
+
+/* --- Left Column: Copy & Actions --- */
+.hero-copy-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 510px;
+  z-index: 5;
+}
+
+/* Lightning Pill Badge */
+.hero-learning-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(2, 44, 32, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 5px 14px;
+  border-radius: 9999px;
+  backdrop-filter: blur(10px);
+  margin-bottom: 14px;
+}
+
+.badge-lightning {
+  color: var(--neon-lime);
+  font-size: 12px;
+}
+
+.badge-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: 0.2px;
+}
+
+/* Main Hero Headline */
+.hero-headline {
+  font-family: var(--font-hero);
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.6px;
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+
+.headline-white {
+  display: block;
+  color: #ffffff;
+}
+
+.headline-green {
+  color: var(--neon-lime);
+  display: block;
+}
+
+/* Hero Subtitle */
+.hero-lead-text {
+  font-size: 13.5px;
+  line-height: 1.52;
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 22px;
+  max-width: 440px;
+  font-weight: 400;
+}
+
+/* CTA Buttons */
+.hero-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.btn-start-playing {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--neon-lime);
+  color: #022319;
+  border: none;
+  font-size: 13.5px;
+  font-weight: 800;
+  padding: 10px 22px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-start-playing:hover {
+  background: var(--neon-lime-hover);
+  transform: translateY(-2px);
+}
+
+.btn-start-playing svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+
+.btn-start-playing:hover svg {
+  transform: translateX(3px);
+}
+
+.btn-watch-trailer {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 20px;
+  border-radius: 9999px;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition: all 0.2s ease;
+}
+
+.btn-watch-trailer:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-watch-trailer svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* --- Right Column: Fanned Cards & Stats Capsule --- */
+.hero-visual-col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Cards Fan Deck */
+.deck-stage {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  perspective: 1200px;
+}
+
+/* Individual Role Card */
+.fan-card {
+  position: absolute;
+  bottom: 20px;
+  width: 215px;
+  height: 310px;
+  border-radius: 24px;
+  cursor: pointer;
+  transform-origin: 50% 100%;
+  transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1), filter 0.3s ease;
+  will-change: transform;
+}
+
+.card-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card Header */
+.card-top-bar {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px 0 14px;
+}
+
+.card-tag {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.card-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  padding: 2px 7px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 10px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.star-icon {
+  color: #facc15;
+  font-size: 9px;
+}
+
+/* Card Role Title */
+.card-title {
+  position: relative;
+  z-index: 5;
+  font-family: var(--font-hero);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+  color: #ffffff;
+  padding: 4px 14px 0 14px;
+  text-transform: uppercase;
+}
+
+/* Character Image Frame */
+.card-img-frame {
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.card-img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.3s ease;
+}
+
+/* Werewolf Card Absolute Header Overlay */
+.card-center-werewolf .card-top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 12px 14px 0 14px;
+}
+
+.card-center-werewolf .card-title {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 0 14px;
+}
+
+.card-center-werewolf .card-img-frame {
+  height: 100%;
+}
+
+.card-center-werewolf .full-werewolf-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 10%;
+}
+
+/* Fanned Resting Placements - Mathematically Symmetric */
+/* 1. Scholar (Far Left) */
+.card-scholar {
+  left: calc(50% - 270px);
+  transform: translateY(34px) rotate(-18deg) scale(0.92);
+  z-index: 10;
+}
+.card-scholar .card-box {
+  background: var(--card-oldman-grad);
+}
+
+/* 2. Vision (Mid Left) */
+.card-vision {
+  left: calc(50% - 170px);
+  transform: translateY(14px) rotate(-9deg) scale(0.96);
+  z-index: 20;
+}
+.card-vision .card-box {
+  background: var(--card-seer-grad);
+}
+
+/* 3. Werewolf (Center Hero) */
+.card-center-werewolf {
+  left: calc(50% - 115px);
+  width: 226px;
+  height: 324px;
+  transform: translateY(-4px) rotate(0deg) scale(1.05);
+  z-index: 35;
+}
+.card-center-werewolf .card-box {
+  background: var(--card-werewolf-grad);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+/* 4. Alchemist (Mid Right) */
+.card-alchemist {
+  left: calc(50% - 48px);
+  transform: translateY(14px) rotate(9deg) scale(0.96);
+  z-index: 20;
+}
+.card-alchemist .card-box {
+  background: var(--card-witch-grad);
+}
+
+/* 5. Navigator (Far Right) */
+.card-navigator {
+  left: calc(50% + 50px);
+  transform: translateY(34px) rotate(18deg) scale(0.92);
+  z-index: 10;
+}
+.card-navigator .card-box {
+  background: var(--card-hunter-grad);
+}
+
+/* Hover Lift Effect */
+.fan-card:hover {
+  transform: translateY(-35px) rotate(0deg) scale(1.08) !important;
+  z-index: 100 !important;
+  filter: brightness(1.08);
+}
+
+.fan-card:hover .card-img-frame img {
+  transform: scale(1.06);
+}
+
+/* --- Hero Glass Stats Capsule (Anchored directly under cards) --- */
+.hero-stats-capsule {
+  position: relative;
+  z-index: 45;
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  background: rgba(2, 44, 32, 0.88);
+  border: 1.5px solid var(--neon-lime);
+  border-radius: 9999px;
+  padding: 8px 26px;
+  backdrop-filter: blur(16px);
+  margin-top: -18px;
+  transition: transform 0.25s ease;
+}
+
+.hero-stats-capsule:hover {
+  transform: translateY(-2px);
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.stat-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--neon-lime);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-family: var(--font-hero);
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.2px;
+  line-height: 1.1;
+}
+
+.stat-sub {
+  font-size: 10.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.stat-sep {
+  width: 1px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ==========================================================================
+   Bottom Organic Wave & White Value Props (Visible at a Glance)
+   ========================================================================== */
+.bottom-white-bar-wrapper {
+  position: relative;
+  z-index: 30;
+  width: 100%;
+  margin-top: auto;
+}
+
+.wave-transition-wrap {
+  position: relative;
+  width: 100%;
+  line-height: 0;
+  z-index: 2;
+  margin-bottom: -1px;
+}
+
+.wave-svg {
+  width: 100%;
+  height: 54px;
+  display: block;
+}
+
+.value-props-section {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 10px 48px 18px 48px;
+}
+
+.value-props-grid {
+  max-width: 1340px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  align-items: center;
+}
+
+.prop-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.prop-icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.14);
+  color: #059669;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.prop-icon-circle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.prop-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.prop-title {
+  font-family: var(--font-hero);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+
+.prop-desc {
+  font-size: 11.5px;
+  line-height: 1.35;
+  color: #64748b;
+}
+
+/* ==========================================================================
+   Sound Toggle Floating Dock
+   ========================================================================== */
+.floating-audio-dock {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.audio-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(2, 44, 32, 0.85);
+  border: 1.5px solid var(--neon-lime);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition: all 0.2s ease;
+}
+
+.audio-btn:hover {
+  background: var(--neon-lime);
+  color: #022319;
+  transform: scale(1.08);
+}
+
+.audio-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 1180px) {
+  .hero-split-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .hero-copy-col {
+    max-width: 600px;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .hero-headline {
+    font-size: 38px;
+  }
+  .hero-lead-text {
+    max-width: 500px;
+  }
+  .hero-cta-row {
+    justify-content: center;
+  }
+  .deck-stage {
+    height: 320px;
+  }
+  .fan-card {
+    width: 190px;
+    height: 280px;
+  }
+  .card-scholar { left: calc(50% - 225px); }
+  .card-vision { left: calc(50% - 130px); }
+  .card-center-werewolf { left: calc(50% - 98px); width: 200px; height: 295px; }
+  .card-alchemist { left: calc(50% - 40px); }
+  .card-navigator { left: calc(50% + 55px); }
+  .value-props-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-nav-wrapper {
+    padding: 14px 20px 0 20px;
+  }
+  .hero-content-wrapper {
+    padding: 10px 20px;
+  }
+  .nav-menu {
+    display: none;
+  }
+  .hero-headline {
+    font-size: 32px;
+  }
+  .hero-stats-capsule {
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 12px 20px;
+    gap: 10px;
+  }
+  .stat-sep {
+    display: none;
+  }
+  .value-props-section {
+    padding: 14px 20px 20px 20px;
+  }
+  .value-props-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+

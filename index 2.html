@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clue • Think. Learn. Explore. Smart Games.</title>
+  <link rel="icon" type="image/png" href="assets/favicon-64.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-2.css">
+  <!-- GSAP for Smooth Card Physics & Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+
+  <!-- Ambient Floating 3D Background Props -->
+  <div class="ambient-bg-scene" aria-hidden="true">
+    <!-- Floating 3D Origami Book -->
+    <div class="float-book">
+      <svg viewBox="0 0 80 60" fill="none">
+        <path d="M40 18 C28 8 10 12 4 16 L4 48 C10 44 28 40 40 50 Z" fill="#34d399" opacity="0.9"/>
+        <path d="M40 18 C52 8 70 12 76 16 L76 48 C70 44 52 40 40 50 Z" fill="#10b981" opacity="0.95"/>
+        <path d="M40 18 L40 50" stroke="#064e3b" stroke-width="1.5"/>
+        <path d="M8 22 C16 19 28 20 38 26" stroke="#a7f3d0" stroke-width="1.2" opacity="0.6"/>
+        <path d="M72 22 C64 19 52 20 42 26" stroke="#a7f3d0" stroke-width="1.2" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <!-- Floating Gold Coin with Star -->
+    <div class="float-gold-coin">
+      <svg viewBox="0 0 44 44">
+        <circle cx="22" cy="22" r="20" fill="url(#coinGrad2)" stroke="#eab308" stroke-width="1.8"/>
+        <circle cx="22" cy="22" r="14" fill="none" stroke="#ca8a04" stroke-width="1.2" stroke-dasharray="3 2"/>
+        <text x="22" y="27" font-size="16" font-weight="900" fill="#713f12" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">★</text>
+        <defs>
+          <linearGradient id="coinGrad2" x1="0" y1="0" x2="44" y2="44">
+            <stop offset="0%" stop-color="#fef08a"/>
+            <stop offset="45%" stop-color="#eab308"/>
+            <stop offset="100%" stop-color="#ca8a04"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- Floating Clue 3D Cube / App Icon -->
+    <div class="float-clue-cube">
+      <svg viewBox="0 0 70 70" fill="none">
+        <defs>
+          <linearGradient id="cubeFaceGrad" x1="0" y1="0" x2="60" y2="60">
+            <stop offset="0%" stop-color="#059669"/>
+            <stop offset="50%" stop-color="#047857"/>
+            <stop offset="100%" stop-color="#064e3b"/>
+          </linearGradient>
+          <filter id="cubeGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#10b981" flood-opacity="0.35"/>
+          </filter>
+        </defs>
+        <g filter="url(#cubeGlow)">
+          <rect x="8" y="8" width="54" height="54" rx="18" fill="url(#cubeFaceGrad)" stroke="#34d399" stroke-width="2"/>
+          <!-- Owl eyes -->
+          <circle cx="25" cy="34" r="9" fill="#ffffff"/>
+          <circle cx="45" cy="34" r="9" fill="#ffffff"/>
+          <circle cx="25" cy="34" r="5" fill="#022c22"/>
+          <circle cx="45" cy="34" r="5" fill="#022c22"/>
+          <circle cx="27" cy="32" r="1.8" fill="#34d399"/>
+          <circle cx="47" cy="32" r="1.8" fill="#34d399"/>
+          <path d="M33 40 Q35 43 37 40" stroke="#facc15" stroke-width="2.5" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Ambient Sparkles -->
+    <span class="sparkle sparkle-1">✦</span>
+    <span class="sparkle sparkle-2">✦</span>
+    <span class="sparkle sparkle-3">✦</span>
+  </div>
+
+  <!-- Master 100vh Viewport Layout Container (At A Glance) -->
+  <div class="landing-viewport">
+
+    <!-- Top Navigation Bar Wrapper -->
+    <div class="top-nav-wrapper">
+      <header class="navbar">
+      <div class="nav-left">
+        <!-- Brand Logo -->
+        <a href="#" class="clue-brand-btn" id="clueLogoBtn" title="Clue Interactive Educational Games">
+          <div class="clue-logo-badge">
+            <img src="assets/clue-logo-nav.png" alt="Clue" onerror="this.src='assets/favicon-64.png'">
+          </div>
+          <span class="clue-brand-text">CLUE</span>
+        </a>
+
+        <!-- Navigation Menu -->
+        <nav class="nav-menu">
+          <a href="#home" class="nav-item active">Home</a>
+          <a href="#games" class="nav-item">Games</a>
+          <a href="#about" class="nav-item">About</a>
+          <a href="#learners" class="nav-item">For Learners</a>
+          <a href="#educators" class="nav-item">For Educators</a>
+        </nav>
+      </div>
+
+      <!-- Right Utility Actions -->
+      <div class="nav-right">
+        <!-- Coins Pill -->
+        <div class="coins-capsule" id="coinsPill">
+          <svg class="coin-star-icon" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="9" fill="#eab308" stroke="#fef08a" stroke-width="1"/>
+            <text x="10" y="14" font-size="11" font-weight="900" fill="#713f12" text-anchor="middle">★</text>
+          </svg>
+          <span class="coins-val" id="coinsAmount">28.105.820</span>
+        </div>
+
+        <!-- Sign In Button -->
+        <button class="btn-signin" id="navSignInBtn" type="button">Sign In</button>
+
+        <!-- Sign Up Button -->
+        <button class="btn-signup" id="navSignupBtn" type="button">Sign Up</button>
+      </div>
+    </header>
+  </div>
+
+  <!-- Hero Content Center Stage -->
+  <div class="hero-content-wrapper">
+    <!-- Hero Split 2-Column Grid -->
+    <main class="hero-split-grid">
+
+      <!-- Left Column: Copy & Calls to Action -->
+      <section class="hero-copy-col">
+        <!-- Feature Badge -->
+        <div class="hero-learning-badge">
+          <span class="badge-lightning">⚡</span>
+          <span class="badge-text">More Than Games — Real Learning</span>
+        </div>
+
+        <!-- Main Headline -->
+        <h1 class="hero-headline">
+          <span class="headline-white">Think. Learn. Explore.</span>
+          <span class="headline-green">Smart Games.</span>
+          <span class="headline-white">Knowledge Quest.</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="hero-lead-text">
+          The interactive educational gaming hub where curiosity meets challenge. Sharpen your logic,
+          explore science and strategy, and level up your mind with learners worldwide.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="hero-cta-row">
+          <button class="btn-start-playing" id="startPlayingBtn">
+            <span>🚀 Start Playing</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+
+          <button class="btn-watch-trailer" id="watchTrailerBtn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            <span>Watch Trailer</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Right Column: Interactive Fanned Cards & Stats Ribbon -->
+      <section class="hero-visual-col">
+        <!-- Fanned Cards Deck -->
+        <div class="deck-stage" id="cardsFanDeck">
+
+          <!-- Card 1: The Scholar (Far Left) -->
+          <article class="fan-card card-scholar" data-role="oldman" data-index="0" title="The Scholar • Logic & Reasoning">
+            <div class="card-box">
+              <div class="card-top-bar">
+                <span class="card-tag">★ LOGIC & REASONING</span>
+                <div class="card-badge-pill">
+                  <span class="star-icon">★</span>
+                  <span>4.9</span>
+                </div>
+              </div>
+              <h3 class="card-title">THE SCHOLAR</h3>
+              <div class="card-img-frame">
+                <img src="assets/char-oldman.jpg" alt="The Scholar">
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2: The Vision (Mid Left) -->
+          <article class="fan-card card-vision" data-role="seer" data-index="1" title="The Vision • Physics & Space">
+            <div class="card-box">
+              <div class="card-top-bar">
+                <span class="card-tag">★ PHYSICS & SPACE</span>
+                <div class="card-badge-pill">
+                  <span class="star-icon">★</span>
+                  <span>4.9</span>
+                </div>
+              </div>
+              <h3 class="card-title">THE VISION</h3>
+              <div class="card-img-frame">
+                <img src="assets/char-seer.jpg" alt="The Vision">
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3: Werewolf (Center Hero) -->
+          <article class="fan-card card-center-werewolf" data-role="werewolf" data-index="2" title="Werewolf • Animal Kingdom">
+            <div class="card-box">
+              <div class="card-top-bar">
+                <span class="card-tag">★ ANIMAL KINGDOM</span>
+                <div class="card-badge-pill">
+                  <span class="star-icon">★</span>
+                  <span>4.7</span>
+                </div>
+              </div>
+              <h3 class="card-title">WEREWOLF</h3>
+              <div class="card-img-frame">
+                <img src="assets/card-werewolf.png" class="full-werewolf-img" alt="Werewolf">
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4: The Alchemist (Mid Right) -->
+          <article class="fan-card card-alchemist" data-role="witch" data-index="3" title="The Alchemist • Chemistry">
+            <div class="card-box">
+              <div class="card-top-bar">
+                <span class="card-tag">★ CHEMISTRY</span>
+                <div class="card-badge-pill">
+                  <span class="star-icon">★</span>
+                  <span>4.7</span>
+                </div>
+              </div>
+              <h3 class="card-title">THE ALCHEMIST</h3>
+              <div class="card-img-frame">
+                <img src="assets/char-witch.jpg" alt="The Alchemist">
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 5: The Navigator (Far Right) -->
+          <article class="fan-card card-navigator" data-role="hunter" data-index="4" title="The Navigator • Math & Geometry">
+            <div class="card-box">
+              <div class="card-top-bar">
+                <span class="card-tag">★ MATH & GEOMETRY</span>
+                <div class="card-badge-pill">
+                  <span class="star-icon">★</span>
+                  <span>4.6</span>
+                </div>
+              </div>
+              <h3 class="card-title">THE NAVIGATOR</h3>
+              <div class="card-img-frame">
+                <img src="assets/char-hunter.jpg" alt="The Navigator">
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Glass Stats Capsule (Directly underneath the card deck) -->
+        <div class="hero-stats-capsule">
+          <!-- Stat 1 -->
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number">100K+</span>
+              <span class="stat-sub">Active Learners</span>
+            </div>
+          </div>
+
+          <div class="stat-sep" aria-hidden="true"></div>
+
+          <!-- Stat 2 -->
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S20.17 9 21 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number">50+</span>
+              <span class="stat-sub">Interactive Games</span>
+            </div>
+          </div>
+
+          <div class="stat-sep" aria-hidden="true"></div>
+
+          <!-- Stat 3 -->
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-number">Worldwide</span>
+              <span class="stat-sub">Learning Community</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Bottom White Bar Wrapper (Visible At A Glance) -->
+  <div class="bottom-white-bar-wrapper">
+    <!-- Organic Curved Wave Swoosh Transition to Clean White Section -->
+    <div class="wave-transition-wrap" aria-hidden="true">
+      <svg class="wave-svg" viewBox="0 0 1440 60" preserveAspectRatio="none" fill="none">
+        <!-- Ambient Back Layer Wave -->
+        <path d="M0,18 C340,55 780,50 1440,12 L1440,60 L0,60 Z" fill="rgba(6, 78, 59, 0.35)"/>
+        <!-- Main Crisp White Foreground Wave -->
+        <path d="M0,26 C320,54 680,56 1060,24 C1240,10 1360,15 1440,28 L1440,60 L0,60 Z" fill="#ffffff"/>
+      </svg>
+    </div>
+
+    <!-- Bottom Section: 4 Value Propositions on Crisp White Background -->
+    <section class="value-props-section">
+    <div class="value-props-grid">
+
+      <!-- Value Prop 1: Build Critical Thinking -->
+      <article class="prop-card">
+        <div class="prop-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04z"/>
+            <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04z"/>
+          </svg>
+        </div>
+        <div class="prop-details">
+          <h4 class="prop-title">Build Critical Thinking</h4>
+          <p class="prop-desc">Solve real challenges and sharpen your logic.</p>
+        </div>
+      </article>
+
+      <!-- Value Prop 2: Explore New Subjects -->
+      <article class="prop-card">
+        <div class="prop-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 2v7.31L4.54 19.5a2 2 0 0 0 1.73 3h11.46a2 2 0 0 0 1.73-3L14 9.31V2"/>
+            <line x1="8.5" y1="2" x2="15.5" y2="2"/>
+            <line x1="7" y1="14" x2="17" y2="14"/>
+          </svg>
+        </div>
+        <div class="prop-details">
+          <h4 class="prop-title">Explore New Subjects</h4>
+          <p class="prop-desc">From science to strategy, find what excites you.</p>
+        </div>
+      </article>
+
+      <!-- Value Prop 3: Learn Through Play -->
+      <article class="prop-card">
+        <div class="prop-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="6" width="20" height="12" rx="4"/>
+            <line x1="6" y1="12" x2="10" y2="12"/>
+            <line x1="8" y1="10" x2="8" y2="14"/>
+            <line x1="15" y1="11" x2="15.01" y2="11"/>
+            <line x1="18" y1="13" x2="18.01" y2="13"/>
+          </svg>
+        </div>
+        <div class="prop-details">
+          <h4 class="prop-title">Learn Through Play</h4>
+          <p class="prop-desc">Fun, interactive and rewarding for all ages.</p>
+        </div>
+      </article>
+
+      <!-- Value Prop 4: Join a Global Community -->
+      <article class="prop-card">
+        <div class="prop-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="prop-details">
+          <h4 class="prop-title">Join a Global Community</h4>
+          <p class="prop-desc">Connect, compete and grow together.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+</div> <!-- /bottom-white-bar-wrapper -->
+</div> <!-- /landing-viewport -->
+
+  <!-- Ambient Audio Track -->
+  <audio id="bgAudio" preload="auto">
+    <source src="assets/gigidelaromusic-calm-ether-loop-short-450954.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Floating Audio Controls Dock -->
+  <aside class="floating-audio-dock">
+    <button class="audio-btn" id="soundToggleBtn" title="Toggle Sound / Ambient Music" aria-label="Toggle Sound">
+      <svg class="sound-icon-on" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+      </svg>
+    </button>
+  </aside>
+
+  <!-- Interactive JavaScript -->
+  <script>
+    // Continuous ambient music and interaction engine
+    document.addEventListener('DOMContentLoaded', () => {
+      const bgAudio = document.getElementById('bgAudio');
+      const soundBtn = document.getElementById('soundToggleBtn');
+      let isPlaying = false;
+
+      if (bgAudio) {
+        bgAudio.volume = 0.50;
+        bgAudio.loop = true;
+
+        const unlockAndPlay = () => {
+          if (!isPlaying) {
+            bgAudio.play().then(() => {
+              isPlaying = true;
+              if (soundBtn) soundBtn.style.background = 'var(--neon-lime)';
+              if (soundBtn) soundBtn.style.color = '#022319';
+            }).catch(() => {});
+          }
+          ['click', 'keydown', 'touchstart'].forEach(evt => {
+            document.removeEventListener(evt, unlockAndPlay);
+          });
+        };
+
+        ['click', 'keydown', 'touchstart'].forEach(evt => {
+          document.addEventListener(evt, unlockAndPlay, { once: true });
+        });
+
+        if (soundBtn) {
+          soundBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (bgAudio.paused) {
+              bgAudio.play();
+              isPlaying = true;
+              soundBtn.style.background = 'var(--neon-lime)';
+              soundBtn.style.color = '#022319';
+            } else {
+              bgAudio.pause();
+              isPlaying = false;
+              soundBtn.style.background = 'rgba(2, 44, 32, 0.85)';
+              soundBtn.style.color = '#ffffff';
+            }
+          });
+        }
+      }
+
+      // 3D Parallax & Smooth Hover on Cards
+      const fanCards = document.querySelectorAll('.fan-card');
+      fanCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          if (typeof gsap !== 'undefined') {
+            gsap.to(card, { y: -38, scale: 1.08, duration: 0.52, ease: 'power3.out', overwrite: 'auto' });
+          }
+        });
+        card.addEventListener('mouseleave', () => {
+          if (typeof gsap !== 'undefined') {
+            gsap.to(card, { y: 0, scale: 1, duration: 0.58, ease: 'power3.out', overwrite: 'auto' });
+          }
+        });
+      });
+
+      // Coin Counter Tap Fun
+      const coinsPill = document.getElementById('coinsPill');
+      const coinsAmount = document.getElementById('coinsAmount');
+      if (coinsPill && coinsAmount) {
+        coinsPill.addEventListener('click', () => {
+          let cur = parseInt(coinsAmount.textContent.replace(/\./g, '')) || 28105820;
+          cur += 500;
+          coinsAmount.textContent = cur.toLocaleString('de-DE');
+          if (typeof gsap !== 'undefined') {
+            gsap.fromTo(coinsPill, { scale: 0.92 }, { scale: 1, duration: 0.3, ease: 'back.out(2)' });
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

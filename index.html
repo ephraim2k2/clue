@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clue • Smart Interactive Educational Gaming</title>
+  <link rel="icon" type="image/png" href="assets/favicon-64.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Top Luxury Scroll Progress Indicator (Zero Clutter, 100% Fluid Visual Feedback) -->
+  <div id="scrollProgressBar" class="scroll-progress-bar" aria-hidden="true"></div>
+
+  <!-- Landing Hero Backdrop: Vibrant Blue Gradient + 3D Moving Perspective Grid + Floating Elements (Scoped strictly to Landing) -->
+  <div class="landing-hero-backdrop" aria-hidden="true">
+    <!-- 3D Curved Perspective Grid Background Canvas -->
+    <canvas id="gridCanvas" class="grid-canvas"></canvas>
+
+    <!-- Ambient Floating 3D Background Elements -->
+    <div class="floating-scene">
+      <div class="floating-item float-witch" id="witchFloat">
+        <img src="assets/witch-float.png" alt="Witch">
+        <div class="witch-aura"></div>
+      </div>
+      <div class="floating-item float-cauldron" id="cauldronFloat">
+        <img src="assets/cauldron-float.png" alt="Magic Cauldron">
+        <div class="cauldron-steam">
+          <span class="bubble b1"></span>
+          <span class="bubble b2"></span>
+          <span class="bubble b3"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Application Wrapper -->
+  <div class="app-container">
+    <!-- Landing Fold: Navbar + Hero Titles + Interactive Character Deck (100% Viewport) -->
+    <section class="landing-fold" id="landingSection">
+      <!-- Top Navigation Bar -->
+      <header class="navbar">
+      <div class="nav-left">
+        <!-- Logo First -->
+        <button class="clue-brand-btn" id="clueLogoBtn" title="Clue Educational Gaming Platform">
+          <img src="assets/clue-logo-nav.png" alt="Clue" class="clue-logo-img">
+          <span class="clue-brand-text">CLUE</span>
+        </button>
+
+        <div class="nav-divider" aria-hidden="true"></div>
+
+        <!-- Navigation Tabs Beside Logo -->
+        <button class="nav-btn nav-btn-active" id="btnGames" aria-label="Games">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S20.17 9 21 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+          </svg>
+          <span>Games</span>
+        </button>
+
+        <!-- <a href="#pillarsSection" class="nav-btn" aria-label="Learn">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+          </svg>
+          <span>Learn</span>
+        </a>
+
+        <a href="#interviewsSection" class="nav-btn" aria-label="Parties">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+          </svg>
+          <span>Parties</span>
+        </a>
+
+        <a href="#howItWorksSection" class="nav-btn" aria-label="Rewards">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
+          </svg>
+          <span>Rewards</span>
+        </a> -->
+
+        <!-- Promo Pill -->
+      
+      </div>
+
+      <!-- Right: Actions, Coins & Profile -->
+      <div class="nav-right">
+      
+
+        <!-- Coins Counter -->
+        <div class="coins-pill" id="coinsPill">
+          <div class="coin-icon-wrapper">
+            <svg class="coin-svg" viewBox="0 0 32 32">
+              <circle cx="16" cy="16" r="14" fill="url(#coinGrad)" stroke="#EAB308" stroke-width="2"/>
+              <circle cx="16" cy="16" r="10" fill="none" stroke="#CA8A04" stroke-width="1.5" stroke-dasharray="3 2"/>
+              <polygon points="16,8.5 18.2,13 23.2,13.7 19.6,17.2 20.5,22.2 16,19.8 11.5,22.2 12.4,17.2 8.8,13.7 13.8,13" fill="#713F12"/>
+              <defs>
+                <linearGradient id="coinGrad" x1="0" y1="0" x2="32" y2="32">
+                  <stop offset="0%" stop-color="#FDE047"/>
+                  <stop offset="50%" stop-color="#EAB308"/>
+                  <stop offset="100%" stop-color="#CA8A04"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <span class="coins-amount" id="coinsAmount">28.105.820</span>
+        </div>
+
+        <!-- Sign Up Button -->
+        <button class="nav-signup-btn" id="navSignupBtn" type="button">Sign Up</button>
+      </div>
+    </header>
+
+    <!-- Hero Titles & Subtitle -->
+    <main class="hero-section">
+      <div class="hero-titles-group" id="heroTitles">
+        <h1 class="hero-title hero-title-top" id="heroTitleTop">THINK. PLAY. CONNECT.</h1>
+        <h2 class="hero-title hero-title-bottom" id="heroTitleBottom">
+          COMPETE. WIN. <span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.
+        </h2>
+      </div>
+
+      <p class="hero-subtitle" id="heroSubtitle">
+        The knowledge, gaming, entertainment &amp; social platform built around a simple idea: learning should happen without feeling like studying. Turn knowledge into an experience.
+      </p>
+
+
+      <!-- Fanned Cards Deck Showcase -->
+      <section class="cards-showcase-container" id="cardsShowcase">
+        <div class="cards-fan-deck" id="cardsFanDeck">
+          <!-- Card 1: The Scholar (Far Left) -->
+          <div class="fan-card card-oldman" data-role="oldman" data-index="0" title="The Scholar • Primary, Secondary & University Tests">
+            <div class="card-inner-box">
+              <div class="card-topo-pattern"></div>
+              <div class="card-header-bar">
+                <span class="card-side-tag">STRUCTURED TESTS</span>
+                <div class="card-rating-pill">
+                  <span class="pill-medal"><svg class="ui-icon ui-icon-gold" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg></span>
+                  <span class="pill-val">4.9</span>
+                </div>
+              </div>
+              <h3 class="card-role-name">THE SCHOLAR</h3>
+              <div class="card-illustration-frame">
+                <img src="assets/char-oldman.jpg" class="card-char-img" alt="The Scholar">
+              </div>
+              <div class="card-hover-footer">
+                <button class="card-select-btn">Explore Module</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: The Maestro (Mid Left) -->
+          <div class="fan-card card-seer" data-role="seer" data-index="1" title="The Maestro • Music, Lyrics & Movies">
+            <div class="card-inner-box">
+              <div class="card-topo-pattern"></div>
+              <div class="card-header-bar">
+                <span class="card-side-tag">MUSIC & CINEMA</span>
+                <div class="card-rating-pill">
+                  <span class="pill-medal"><svg class="ui-icon ui-icon-gold" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg></span>
+                  <span class="pill-val">4.8</span>
+                </div>
+              </div>
+              <h3 class="card-role-name title-swash">THE MAESTRO</h3>
+              <div class="card-illustration-frame">
+                <img src="assets/char-seer.jpg" class="card-char-img" alt="The Maestro">
+              </div>
+              <div class="card-hover-footer">
+                <button class="card-select-btn">Explore Module</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: The Tactician (Center Hero) -->
+          <div class="fan-card card-werewolf active-hero" data-role="werewolf" data-index="2" title="The Tactician • Brain Games, Riddles & 3 Lives">
+            <div class="card-inner-box">
+              <img src="assets/card-werewolf.png" class="full-card-art" alt="The Tactician">
+              <div class="card-hover-footer">
+                <button class="card-select-btn">Explore Module</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: The Discoverer (Mid Right) -->
+          <div class="fan-card card-witch" data-role="witch" data-index="3" title="The Discoverer • Nigerian, African & World Culture">
+            <div class="card-inner-box">
+              <div class="card-topo-pattern"></div>
+              <div class="card-header-bar">
+                <span class="card-side-tag">CULTURE & FAITH</span>
+                <div class="card-rating-pill">
+                  <span class="pill-medal"><svg class="ui-icon ui-icon-gold" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg></span>
+                  <span class="pill-val">4.8</span>
+                </div>
+              </div>
+              <h3 class="card-role-name">THE DISCOVERER</h3>
+              <div class="card-illustration-frame">
+                <img src="assets/char-witch.jpg" class="card-char-img" alt="The Discoverer">
+              </div>
+              <div class="card-hover-footer">
+                <button class="card-select-btn">Explore Module</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: The Champion (Far Right) -->
+          <div class="fan-card card-hunter" data-role="hunter" data-index="4" title="The Champion • Clue Parties, 1v1 Duels & Prizes">
+            <div class="card-inner-box">
+              <div class="card-topo-pattern"></div>
+              <div class="card-header-bar">
+                <span class="card-side-tag">PARTIES & DUELS</span>
+                <div class="card-rating-pill">
+                  <span class="pill-medal"><svg class="ui-icon ui-icon-gold" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg></span>
+                  <span class="pill-val">4.7</span>
+                </div>
+              </div>
+              <h3 class="card-role-name">THE CHAMPION</h3>
+              <div class="card-illustration-frame">
+                <img src="assets/char-hunter.jpg" class="card-char-img" alt="The Champion">
+              </div>
+              <div class="card-hover-footer">
+                <button class="card-select-btn">Explore Module</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    </section> <!-- /landing-fold -->
+
+    <!-- =====================================================================
+         Section 2: The Two Core Knowledge Experiences (Educational • Brain Teasers)
+         ===================================================================== -->
+    <section class="platform-section" id="pillarsSection">
+      <h2 class="section-title">
+        SERIOUS LEARNING. <span class="highlight-iris">RECREATIONAL PLAY.</span>
+      </h2>
+      <p class="section-subtitle">
+        Clue is built around a simple idea: learning should happen without feeling like studying.
+      </p>
+
+      <div class="pillars-grid">
+        <!-- Pillar 1: Educational Knowledge (Primary, Secondary, University) -->
+        <article class="pillar-card pillar-tests">
+          <div class="pillar-top-row">
+            <div class="pillar-icon-box" title="Educational Knowledge"><svg class="ui-icon ui-icon-blue ui-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+            <span class="pillar-tag-badge">A. EDUCATIONAL</span>
+          </div>
+          <h3 class="pillar-title">Educational &amp; Exam Tests</h3>
+          <p class="pillar-desc">
+            Master Primary, Secondary, and University courses through structured topic revision and diagnostic practice tests.
+          </p>
+          <ul class="pillar-perks-list">
+            <li><span class="check"><svg class="ui-icon ui-icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Primary &amp; Secondary Mock Exams</li>
+            <li><span class="check"><svg class="ui-icon ui-icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> University Course &rarr; Topic &rarr; Test</li>
+            <li><span class="check"><svg class="ui-icon ui-icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Diagnostic Weakness Tracking</li>
+          </ul>
+          <button class="pillar-btn" data-action="test">
+            <span>Explore Curriculum Tests</span>
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </article>
+
+        <!-- Pillar 2: Brain Teasers & Cultural Knowledge -->
+        <article class="pillar-card pillar-games">
+          <div class="pillar-top-row">
+            <div class="pillar-icon-box" title="Brain Teasers"><svg class="ui-icon ui-icon-purple ui-icon-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5C13 2.12 11.88 1 10.5 1S8 2.12 8 3.5V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7 1.49 0 2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5c1.38 0 2.5-1.12 2.5-2.5s-1.12-2.5-2.5-2.5z"/></svg></div>
+            <span class="pillar-tag-badge">B. BRAIN TEASERS</span>
+          </div>
+          <h3 class="pillar-title">Recreational Brain Teasers</h3>
+          <p class="pillar-desc">
+            Think, laugh, and compete without exam pressure — moving from Football and Music to History, Movies, and Logic.
+          </p>
+          <ul class="pillar-perks-list">
+            <li><span class="check"><svg class="ui-icon ui-icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Riddles, Logic, Trivia &amp; Word Games</li>
+            <li><span class="check"><svg class="ui-icon ui-icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Nigerian, African &amp; Global Culture</li>
+            <li><span class="check"><svg class="ui-icon ui-icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Pop Culture, Religion &amp; Technology</li>
+          </ul>
+          <button class="pillar-btn" data-action="game">
+            <span>Play Brain Teasers</span>
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </article>
+
+        <!-- Pillar 3: Three-Life & Clue System -->
+        <article class="pillar-card pillar-prizes">
+          <div class="pillar-top-row">
+            <div class="pillar-icon-box" title="Three-Life System"><svg class="ui-icon ui-icon-heart ui-icon-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+            <span class="pillar-tag-badge" style="color:#f43f5e;background:rgba(244,63,94,0.18);border-color:rgba(244,63,94,0.4);">3-LIFE MECHANIC</span>
+          </div>
+          <h3 class="pillar-title">Three-Life &amp; Clue System</h3>
+          <p class="pillar-desc">
+            Every game runs on <span class="heart-triplet" aria-label="3 Lives"><svg class="ui-icon ui-icon-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg class="ui-icon ui-icon-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg class="ui-icon ui-icon-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span> tension. Wrong answers cost a life, while adaptive Clues drop smart hints when you need them.
+          </p>
+          <ul class="pillar-perks-list">
+            <li><span class="check"><svg class="ui-icon ui-icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> High-Tension <span class="heart-triplet" aria-label="3 Lives"><svg class="ui-icon ui-icon-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg class="ui-icon ui-icon-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg class="ui-icon ui-icon-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span> Life Counter</li>
+            <li><span class="check"><svg class="ui-icon ui-icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Strategic Clues &amp; Second Chances</li>
+            <li><span class="check"><svg class="ui-icon ui-icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Rewarded Revives &amp; Power-ups</li>
+          </ul>
+          <button class="pillar-btn" data-action="prize">
+            <span>Try 3-Life Mode</span>
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </article>
+
+        <!-- Pillar 4: Daily Streaks & Personal Targets -->
+        <article class="pillar-card pillar-interviews">
+          <div class="pillar-top-row">
+            <div class="pillar-icon-box" title="Streaks & Targets"><svg class="ui-icon ui-icon-gold ui-icon-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.61 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM12 20c-3.31 0-6-2.69-6-6 0-1.53.58-2.92 1.54-3.97.23.4.52.77.87 1.09 1.48 1.34 3.71 1.46 5.3.36 1.13-.78 1.79-2.04 1.83-3.39.29.61.46 1.28.46 1.99 0 3.31-2.69 5.92-4 5.92z"/></svg></div>
+            <span class="pillar-tag-badge" style="color:#facc15;background:rgba(234,179,8,0.2);border-color:rgba(250,204,21,0.4);">HABIT ENGINE</span>
+          </div>
+          <h3 class="pillar-title">Streaks &amp; Personal Targets</h3>
+          <p class="pillar-desc">
+            Hit your Daily, Weekly, and Monthly question targets to build 365-day habits that unlock real airtime and prizes.
+          </p>
+          <ul class="pillar-perks-list">
+            <li><span class="check"><svg class="ui-icon ui-icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Day 1 &rarr; 7 &rarr; 30 &rarr; 100 &rarr; 365 Streaks</li>
+            <li><span class="check"><svg class="ui-icon ui-icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Unlock Airtime, Data &amp; Clue Points</li>
+            <li><span class="check"><svg class="ui-icon ui-icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Food Vouchers, Discounts &amp; Prizes</li>
+          </ul>
+          <button class="pillar-btn" data-action="interview">
+            <span>Start Your Streak</span>
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </article>
+      </div>
+    </section>
+  </div> <!-- /app-container (Part 1) -->
+
+  <!-- =====================================================================
+       Section 3: The Clue Game Library (Full-Bleed Vibrant Royal Purple Section)
+       ===================================================================== -->
+  <section class="platform-section full-bleed-purple-section" id="prizesSection">
+      <h2 class="section-title">
+        NOT ONE QUIZ REPEATED. <span class="highlight-iris">AN EXPANDING ARSENAL.</span>
+      </h2>
+      <p class="section-subtitle">
+        Explore diverse game engines crafted for music buffs, movie lovers, rapid logic, and live 1v1 showdowns.
+      </p>
+
+      <!-- Interactive Engine Selector Bar (Tabs across the top) -->
+      <div class="library-engines-nav" role="tablist">
+        <button class="engine-nav-tab active" data-engine="music" type="button" role="tab" aria-selected="true">
+          <svg class="ui-icon ui-icon-md" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          <span class="tab-label">Music Games Suite</span>
+          <span class="tab-badge">Audio Snips</span>
+        </button>
+
+        <button class="engine-nav-tab" data-engine="movies" type="button" role="tab" aria-selected="false">
+          <svg class="ui-icon ui-icon-md" viewBox="0 0 24 24" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+          <span class="tab-label">Movie &amp; Visual Suite</span>
+          <span class="tab-badge">Scene Decode</span>
+        </button>
+
+        <button class="engine-nav-tab" data-engine="brain" type="button" role="tab" aria-selected="false">
+          <svg class="ui-icon ui-icon-md" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          <span class="tab-label">Brain &amp; Logic Games</span>
+          <span class="tab-badge">Riddles &amp; Patterns</span>
+        </button>
+
+        <button class="engine-nav-tab" data-engine="duels" type="button" role="tab" aria-selected="false">
+          <svg class="ui-icon ui-icon-md" viewBox="0 0 24 24" fill="currentColor"><path d="M6.92 5h-2.1L12 12.18 19.18 5h-2.1L12 10.08 6.92 5zM12 13.82L4.82 21h2.1L12 15.92 17.08 21h2.1L12 13.82z"/></svg>
+          <span class="tab-label">1v1 &amp; Tournament Arenas</span>
+          <span class="tab-badge">Live Elimination</span>
+        </button>
+      </div>
+
+      <!-- Main Showcase Stage -->
+      <div class="library-showcase-stage" id="libraryShowcaseStage">
+        <!-- Left: Engine Information & Highlights -->
+        <div class="engine-info-card">
+          <div class="info-badge-row">
+            <span class="engine-category-tag" id="engineCategoryTag">AUDIO RECOGNITION ENGINE</span>
+            <span class="engine-stats-tag" id="engineStatsTag">12k+ Tracks • 5s Audio Snips</span>
+          </div>
+
+          <h3 class="engine-showcase-title" id="engineShowcaseTitle">Music Games Suite: Who Sang This? &amp; Lyric Blitz</h3>
+          
+          <p class="engine-showcase-desc" id="engineShowcaseDesc">
+            Test your musical instincts across Afrobeats, Amapiano, Hip-Hop, Pop, and Gospel. Listen to a 5-second audio snippet, name the artist, fill missing verses before the clock runs out, and explore deep album lore.
+          </p>
+
+          <!-- Key Engine Formats / Features List -->
+          <div class="engine-features-list" id="engineFeaturesList">
+            <div class="feature-item">
+              <div class="feature-bullet-icon">
+                <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+              </div>
+              <div class="feature-item-content">
+                <strong>Who Sang This?</strong>
+                <span>Recognize breakout singles &amp; global chart-toppers within 5 seconds.</span>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-bullet-icon">
+                <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+              </div>
+              <div class="feature-item-content">
+                <strong>Finish the Lyrics</strong>
+                <span>Fill missing verses and hooks under high-speed countdown clocks.</span>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-bullet-icon">
+                <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+              </div>
+              <div class="feature-item-content">
+                <strong>Artist &amp; Album Deep Cuts</strong>
+                <span>Producers, release dates, tracklists, and cultural music history.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Action Bar -->
+          <div class="engine-cta-bar">
+            <button class="engine-play-btn" id="engineLaunchBtn" type="button">
+              <span id="engineLaunchBtnText">Play Music Suite</span>
+              <svg class="ui-icon" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+            </button>
+            <span class="engine-mode-note" id="engineModeNote">Mode: Solo Challenge or 1v1 Live Duel</span>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Live Simulation Frame (Crisp, High-End Card) -->
+        <div class="engine-interactive-preview">
+          <!-- Glass Chrome Top Bar -->
+          <div class="preview-chrome-bar">
+            <div class="preview-brand-tag">
+              <span class="preview-title" id="previewChromeTitle">CLUE AUDIO ENGINE</span>
+            </div>
+            <div class="preview-hud-metrics">
+              <span class="preview-hearts" aria-label="3 Lives">
+                <svg class="ui-icon heart-icon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <svg class="ui-icon heart-icon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <svg class="ui-icon heart-icon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </span>
+              <span class="preview-timer-pill" id="previewTimerPill">00:04</span>
+            </div>
+          </div>
+
+          <!-- Live Visual Canvas (Waveform / Quote / HUD) -->
+          <div class="preview-visual-stage" id="previewVisualStage">
+            <div class="audio-waveform-graphic">
+              <span class="wave-bar w1"></span>
+              <span class="wave-bar w2"></span>
+              <span class="wave-bar w3"></span>
+              <span class="wave-bar w4"></span>
+              <span class="wave-bar w5"></span>
+              <span class="wave-bar w6"></span>
+              <span class="wave-bar w7"></span>
+              <span class="wave-bar w8"></span>
+              <span class="wave-bar w9"></span>
+              <span class="wave-bar w10"></span>
+            </div>
+            <span class="audio-playing-track" id="previewTrackText">Now Playing: 5s Clip • Afrobeats Hit</span>
+          </div>
+
+          <!-- Prompt & Clue -->
+          <div class="preview-prompt-box">
+            <span class="preview-mode-sub" id="previewModeSub">Who Sang This?</span>
+            <h4 class="preview-question" id="previewQuestion">"Name the artist behind this 2023 chart-topping hit:"</h4>
+          </div>
+
+          <!-- Adaptive Clue Hint -->
+          <div class="preview-hint-pill">
+            <span class="hint-badge">CLUE HINT</span>
+            <span class="hint-content" id="previewHintContent">"Born in Lagos • Known for high-energy Fuji-infused anthems"</span>
+          </div>
+
+          <!-- 4 Interactive Playable Options -->
+          <div class="preview-options-grid" id="previewOptionsGrid">
+            <button class="preview-opt-btn" data-opt="0" type="button">
+              <span class="opt-key">A</span>
+              <span class="opt-name">Burna Boy</span>
+            </button>
+            <button class="preview-opt-btn" data-opt="1" type="button">
+              <span class="opt-key">B</span>
+              <span class="opt-name">Asake</span>
+            </button>
+            <button class="preview-opt-btn" data-opt="2" type="button">
+              <span class="opt-key">C</span>
+              <span class="opt-name">Rema</span>
+            </button>
+            <button class="preview-opt-btn" data-opt="3" type="button">
+              <span class="opt-key">D</span>
+              <span class="opt-name">Fireboy DML</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Engine Telemetry Ribbon -->
+      <div class="engine-telemetry-ribbon" style="padding-top:40px!important;">
+        <div class="telemetry-item">
+          <svg class="ui-icon ui-icon-subtle" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <span><strong>100+ Game Formats:</strong> Never one quiz repeated</span>
+        </div>
+        <div class="telemetry-divider"></div>
+        <div class="telemetry-item">
+          <svg class="ui-icon ui-icon-subtle" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2.05v3.03c3.39.49 6 3.39 6 6.92 0 .9-.18 1.75-.48 2.54l2.6 1.53c.56-1.24.88-2.62.88-4.07 0-5.18-3.95-9.45-9-9.95zM12 19c-3.87 0-7-3.13-7-7 0-3.53 2.61-6.43 6-6.92V2.05c-5.05.5-9 4.76-9 9.95 0 5.52 4.47 10 9.99 10 3.31 0 6.24-1.61 8.04-4.09l-2.45-1.44C16.14 17.84 14.22 19 12 19z"/></svg>
+          <span><strong>3-Second Matchmaking:</strong> Live queues &amp; instant 1v1 duels</span>
+        </div>
+        <div class="telemetry-divider"></div>
+        <div class="telemetry-item">
+          <svg class="ui-icon ui-icon-subtle" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          <span><strong>Adaptive Clues:</strong> Real-time hints when you need them</span>
+        </div>
+      </div>
+  </section>
+
+  <!-- Main Application Wrapper (Part 2) -->
+  <div class="app-container">
+    <!-- =====================================================================
+         Section 4: Clue Parties & Clue Live (Gatherings, Events & Fellowships)
+         ===================================================================== -->
+    <section class="platform-section" id="interviewsSection">
+      <h2 class="section-title">
+        TURN ORDINARY GATHERINGS <span class="highlight-iris">INTO COMPETITIONS.</span>
+      </h2>
+      <p class="section-subtitle">
+        From living room birthday parties to televised university championships, Clue powers live audience competition.
+      </p>
+
+      <div class="interviews-container">
+        <div class="interviews-grid">
+          <!-- Card 1: Clue Party -->
+          <article class="exam-card">
+            <div class="exam-badge-row">
+              <span class="exam-company-tag">CLUE PARTIES</span>
+              <span class="exam-duration"><svg class="ui-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg> 30+ Players</span>
+            </div>
+            <h3 class="exam-title">Host a Live Clue Party</h3>
+            <p class="exam-desc">Turn birthdays, house parties, weddings, and lounges into live game shows where guests join from their phones.</p>
+            <div class="exam-skills-tags">
+              <span class="skill-chip"><svg class="ui-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg> Music</span>
+              <span class="skill-chip"><svg class="ui-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg> Movies</span>
+              <span class="skill-chip"><svg class="ui-icon" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 6l3 2v4l-3 2-3-2V8z"/></svg> Football</span>
+              <span class="skill-chip"><svg class="ui-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.28 19.64 10.59 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/></svg> Brain Teasers</span>
+            </div>
+            <button class="exam-action-btn">Host a Clue Party <svg class="ui-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+          </article>
+
+          <!-- Card 2: Clue for Churches -->
+          <article class="exam-card">
+            <div class="exam-badge-row">
+              <span class="exam-company-tag" style="color:#facc15;background:rgba(234,179,8,0.15);border-color:rgba(250,204,21,0.3);">FAITH &amp; FELLOWSHIP</span>
+              <span class="exam-duration"><svg class="ui-icon ui-icon-gold" viewBox="0 0 24 24" fill="currentColor"><path d="M13 3h-2v4H7v2h4v12h2V9h4V7h-4V3z"/></svg> Congregations</span>
+            </div>
+            <h3 class="exam-title">Clue for Churches &amp; Youth</h3>
+            <p class="exam-desc">Run Bible challenges, Sunday School quizzes, youth leagues, and inter-church derbies where members play and grow.</p>
+            <div class="exam-skills-tags">
+              <span class="skill-chip">Bible Challenges</span>
+              <span class="skill-chip">Sunday School</span>
+              <span class="skill-chip">Inter-Church League</span>
+            </div>
+            <button class="exam-action-btn">Explore Church Platform <svg class="ui-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+          </article>
+
+          <!-- Card 3: Clue for Schools & Universities -->
+          <article class="exam-card">
+            <div class="exam-badge-row">
+              <span class="exam-company-tag" style="color:#60a5fa;background:rgba(59,130,246,0.15);border-color:rgba(96,165,250,0.3);">ACADEMIC INSTITUTIONS</span>
+              <span class="exam-duration"><svg class="ui-icon ui-icon-blue" viewBox="0 0 24 24" fill="currentColor"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg> Schools &amp; Unis</span>
+            </div>
+            <h3 class="exam-title">Schools &amp; Universities</h3>
+            <p class="exam-desc">Gamify campus excellence with mock exams, departmental challenges, Faculty vs Faculty cups, and school showdowns.</p>
+            <div class="exam-skills-tags">
+              <span class="skill-chip">Subject Revision</span>
+              <span class="skill-chip">Faculty Cups</span>
+              <span class="skill-chip">Inter-School Derby</span>
+            </div>
+            <button class="exam-action-btn">Campus Tournaments <svg class="ui-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+          </article>
+
+          <!-- Card 4: Clue Live & Media -->
+          <article class="exam-card">
+            <div class="exam-badge-row">
+              <span class="exam-company-tag" style="color:#34d399;background:rgba(16,185,129,0.15);border-color:rgba(52,211,153,0.3);">BROADCAST MEDIA</span>
+              <span class="exam-duration"><svg class="ui-icon ui-icon-green" viewBox="0 0 24 24" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg> Live Streamed</span>
+            </div>
+            <h3 class="exam-title">Clue Live Championships</h3>
+            <p class="exam-desc">Watch televised university showdowns, creator duels, and National Clue Championships streamed live on social channels.</p>
+            <div class="exam-skills-tags">
+              <span class="skill-chip">YouTube Streams</span>
+              <span class="skill-chip">TikTok &amp; Reels</span>
+              <span class="skill-chip">Live Spectating</span>
+            </div>
+            <button class="exam-action-btn">Watch Clue Live <svg class="ui-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+          </article>
+        </div>
+
+        <!-- Trust & Event Bar -->
+        <div class="proctor-trust-bar" style="padding-top:50px!important;">
+          <div class="proctor-feature-item">
+            <span class="icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg></span>
+            <span><strong>Instant Mobile Join:</strong> Players join games in seconds using their smartphones with zero friction</span>
+          </div>
+          <div class="proctor-feature-item">
+            <span class="icon"><svg class="ui-icon ui-icon-gold" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z"/></svg></span>
+            <span><strong>Party Anywhere:</strong> Perfect for house parties, weddings, restaurants, lounges, and conferences</span>
+          </div>
+          <div class="proctor-feature-item">
+            <span class="icon"><svg class="ui-icon ui-icon-gold" viewBox="0 0 24 24" fill="currentColor"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg></span>
+            <span><strong>Real Prizes:</strong> Real-time reward disbursements to winners directly on the platform</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div> <!-- /app-container (Part 2) -->
+
+  <!-- =====================================================================
+       Section 5: Clue Rewards, Sponsored Brand Challenges & Global Community
+       (100% Full-Bleed Royal Purple Section)
+       ===================================================================== -->
+  <section class="platform-section full-bleed-purple-section" id="howItWorksSection">
+      <h2 class="section-title">
+        PLAY KNOWLEDGE. <span class="highlight-iris">WIN REAL REWARDS.</span>
+      </h2>
+      <p class="section-subtitle">
+        Turn your daily knowledge streaks into instant mobile airtime, data bundles, food vouchers, and cash prizes.
+      </p>
+
+      <div class="how-it-works-grid">
+        <div class="step-card">
+          <div class="step-num-pill">01</div>
+          <h3 class="step-card-title">Airtime, Data &amp; Cash</h3>
+          <p class="step-card-desc">
+            Complete Daily, Weekly, and Monthly question targets to unlock instant airtime top-ups, data bundles, and cash prizes.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num-pill">02</div>
+          <h3 class="step-card-title">Sponsored Brand Challenges</h3>
+          <p class="step-card-desc">
+            Compete in nationwide partner tournaments like the <strong>MTN Music Challenge</strong> to win 12 months of free data and rewards.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num-pill">03</div>
+          <h3 class="step-card-title">Restaurant &amp; Business Quests</h3>
+          <p class="step-card-desc">
+            Answer daily brand quests to win lunches, cinema tickets, and local business vouchers while climbing the leaderboard.
+          </p>
+        </div>
+      </div>
+
+      <!-- Clue Chat, Mini-Communities & Global Movement (Unified with Rewards Section) -->
+      <div class="proof-unified-block" id="proofSection" style="padding-top:40px!important;">
+        <div class="proof-metrics-ribbon">
+          <div class="proof-metric-item">
+            <span class="proof-metric-val">100+</span>
+            <span class="proof-metric-label">Knowledge Categories</span>
+          </div>
+          <div class="proof-metric-divider"></div>
+          <div class="proof-metric-item">
+            <span class="proof-metric-val"><span class="heart-triplet" aria-label="3 Lives"><svg class="ui-icon ui-icon-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg class="ui-icon ui-icon-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><svg class="ui-icon ui-icon-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span></span>
+            <span class="proof-metric-label">Three-Life Game Tension</span>
+          </div>
+          <div class="proof-metric-divider"></div>
+          <div class="proof-metric-item">
+            <span class="proof-metric-val">365-Day</span>
+            <span class="proof-metric-label">Streak Habit Engine</span>
+          </div>
+          <div class="proof-metric-divider"></div>
+          <div class="proof-metric-item">
+            <span class="proof-metric-val">Global</span>
+            <span class="proof-metric-label">Nigeria &rarr; Africa &rarr; Worldwide</span>
+          </div>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-stars"><svg class="ui-icon ui-icon-blue" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg> CLUE CHAT &amp; 1v1 DUELS</div>
+            <p class="testimonial-quote">
+              "Challenge friends to instant 1v1 rematches, banter in live Clue Chat, and share your victory cards."
+            </p>
+            <div class="testimonial-author-row">
+              <div class="author-avatar"><svg class="ui-icon ui-icon-gold ui-icon-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg></div>
+              <div class="author-info">
+                <span class="author-name">Friend &amp; Rival Duels</span>
+                <span class="author-role">Chat • Challenge • Share Results</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars"><svg class="ui-icon ui-icon-purple" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg> CLUE GROUPS</div>
+            <p class="testimonial-quote">
+              "Create private groups for classmates, colleagues, or church youth with shared streaks, chat, and leaderboards."
+            </p>
+            <div class="testimonial-author-row">
+              <div class="author-avatar"><svg class="ui-icon ui-icon-blue ui-icon-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+              <div class="author-info">
+                <span class="author-name">Mini-Communities</span>
+                <span class="author-role">Group Streaks &amp; Leaderboards</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars"><svg class="ui-icon ui-icon-green" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg> MULTILINGUAL VISION</div>
+            <p class="testimonial-quote">
+              "Explore Nigerian culture, African heritage, Arabic vocabulary, and global trivia designed for players everywhere."
+            </p>
+            <div class="testimonial-author-row">
+              <div class="author-avatar"><svg class="ui-icon ui-icon-green ui-icon-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
+              <div class="author-info">
+                <span class="author-name">Multilingual Heritage</span>
+                <span class="author-role">Arabic • African Culture • Global</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- Main Application Wrapper (Part 3) -->
+  <div class="app-container">
+
+    <!-- =====================================================================
+         Section 6: Simple, Transparent Pricing (Individual & Company Plans)
+         ===================================================================== -->
+    <section class="platform-section" id="pricingSection">
+      <h2 class="section-title">
+        SIMPLE PLANS. <span class="highlight-iris">INDIVIDUAL &amp; COMPANY.</span>
+      </h2>
+      <p class="section-subtitle">
+        Start playing for free as an individual, or launch live interactive arenas for your company, school, or brand.
+      </p>
+
+      <!-- Interactive Audience Switch: Individual vs Company -->
+      <div class="pricing-billing-toggle" role="tablist" aria-label="Pricing Category">
+        <button class="billing-tab active" data-pricing-tab="individual" type="button" role="tab" aria-selected="true">
+          For Individuals
+        </button>
+        <button class="billing-tab" data-pricing-tab="company" type="button" role="tab" aria-selected="false">
+          For Companies
+          <span class="billing-save-chip">B2B &amp; EVENTS</span>
+        </button>
+      </div>
+
+      <!-- INDIVIDUAL PLANS GRID (3 Cards) -->
+      <div class="pricing-grid active" id="pricingGridIndividual" data-pricing-panel="individual" role="tabpanel">
+        <!-- Individual Plan 1: Free Cluer -->
+        <article class="pricing-card">
+          <div class="pricing-top-row">
+            <span class="pricing-tier-tag">INDIVIDUAL • FREE</span>
+            <span class="pricing-audience">Everyday Players</span>
+          </div>
+          <h3 class="pricing-plan-name">Free Cluer</h3>
+          <div class="pricing-price-block">
+            <span class="pricing-amount">₦0</span>
+            <span class="pricing-period">/ forever free</span>
+          </div>
+          <p class="pricing-desc">
+            Jump into daily trivia, 3-life challenges, and public sponsored tournaments with zero cost to join.
+          </p>
+          <ul class="pricing-perks-list">
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Daily 20-Question Streak Quests</li>
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Public 1v1 Matchmaking Duels</li>
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Eligible for Airtime &amp; Data Drops</li>
+          </ul>
+          <button class="pricing-action-btn" data-plan="Free Cluer (Individual)" type="button">
+            Start Playing Free <svg class="ui-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </article>
+
+        <!-- Individual Plan 2: Clue Plus (Featured) -->
+        <article class="pricing-card pricing-card-featured">
+          <div class="pricing-top-row">
+            <span class="pricing-tier-tag featured-tag">MOST POPULAR</span>
+            <span class="pricing-audience">Students &amp; Pros</span>
+          </div>
+          <h3 class="pricing-plan-name">Clue Plus</h3>
+          <div class="pricing-price-block">
+            <span class="pricing-amount">₦2,500</span>
+            <span class="pricing-period">/ month</span>
+          </div>
+          <p class="pricing-desc">
+            Unlock unlimited curriculum exam prep, extra daily clue hints, streak shields, and priority tournament entry.
+          </p>
+          <ul class="pricing-perks-list">
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Unlimited Course &rarr; Topic &rarr; Test Prep</li>
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> 3x Daily Clue Hints &amp; Streak Shields</li>
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Private Clue Groups (Up to 50)</li>
+          </ul>
+          <button class="pricing-action-btn" data-plan="Clue Plus (Individual)" type="button">
+            Upgrade to Clue Plus <svg class="ui-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </article>
+
+        <!-- Individual Plan 3: Personal Party Host -->
+        <article class="pricing-card">
+          <div class="pricing-top-row">
+            <span class="pricing-tier-tag" style="color:#b45309;background:#fef3c7;border-color:#fde68a;">INDIVIDUAL HOST</span>
+            <span class="pricing-audience">Friends &amp; Parties</span>
+          </div>
+          <h3 class="pricing-plan-name">Party Host Pass</h3>
+          <div class="pricing-price-block">
+            <span class="pricing-amount">₦7,500</span>
+            <span class="pricing-period">/ month</span>
+          </div>
+          <p class="pricing-desc">
+            Turn birthdays, house parties, weddings, and family gatherings into live interactive game shows on any TV.
+          </p>
+          <ul class="pricing-perks-list">
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Host Live Parties (Up to 100 Guests)</li>
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Big-Screen TV &amp; Mobile PIN Join</li>
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Custom Birthday &amp; Couple Decks</li>
+          </ul>
+          <button class="pricing-action-btn" data-plan="Party Host Pass (Individual)" type="button">
+            Get Party Pass <svg class="ui-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </article>
+      </div>
+
+      <!-- COMPANY & ORGANIZATION PLANS GRID (3 Cards) -->
+      <div class="pricing-grid" id="pricingGridCompany" data-pricing-panel="company" role="tabpanel">
+        <!-- Company Plan 1: Business, Lounge & Team Pass -->
+        <article class="pricing-card">
+          <div class="pricing-top-row">
+            <span class="pricing-tier-tag">COMPANY • TEAMS</span>
+            <span class="pricing-audience">Lounges &amp; Offices</span>
+          </div>
+          <h3 class="pricing-plan-name">Business &amp; Venue</h3>
+          <div class="pricing-price-block">
+            <span class="pricing-amount">₦25,000</span>
+            <span class="pricing-period">/ month</span>
+          </div>
+          <p class="pricing-desc">
+            Drive foot traffic at restaurants and lounges or run weekly corporate team-building and church youth leagues.
+          </p>
+          <ul class="pricing-perks-list">
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Live Venue Lobbies (Up to 300 Players)</li>
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Custom Branded Trivia &amp; Menu Vouchers</li>
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Staff, Congregation &amp; Guest Leaderboards</li>
+          </ul>
+          <button class="pricing-action-btn" data-plan="Business & Venue (Company)" type="button">
+            Start Business Plan <svg class="ui-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </article>
+
+        <!-- Company Plan 2: School & Campus License (Featured) -->
+        <article class="pricing-card pricing-card-featured">
+          <div class="pricing-top-row">
+            <span class="pricing-tier-tag featured-tag">MOST POPULAR</span>
+            <span class="pricing-audience">Schools &amp; Universities</span>
+          </div>
+          <h3 class="pricing-plan-name">Campus &amp; Institution</h3>
+          <div class="pricing-price-block">
+            <span class="pricing-amount">₦75,000</span>
+            <span class="pricing-period">/ month</span>
+          </div>
+          <p class="pricing-desc">
+            Deploy curriculum mock exams, departmental assessments, and Faculty vs Faculty tournaments across your school.
+          </p>
+          <ul class="pricing-perks-list">
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Unlimited Student Diagnostic Scorecards</li>
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Teacher Portal &amp; Course Upload Tools</li>
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Inter-School &amp; Faculty Cup Arenas</li>
+          </ul>
+          <button class="pricing-action-btn" data-plan="Campus & Institution (Company)" type="button">
+            Get Campus License <svg class="ui-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </article>
+
+        <!-- Company Plan 3: Enterprise Brand Sponsor Arena -->
+        <article class="pricing-card">
+          <div class="pricing-top-row">
+            <span class="pricing-tier-tag" style="color:#047857;background:#d1fae5;border-color:#a7f3d0;">ENTERPRISE SPONSOR</span>
+            <span class="pricing-audience">Brands &amp; Telecoms</span>
+          </div>
+          <h3 class="pricing-plan-name">Sponsored Brand Arena</h3>
+          <div class="pricing-price-block">
+            <span class="pricing-amount">Custom</span>
+            <span class="pricing-period">/ campaign</span>
+          </div>
+          <p class="pricing-desc">
+            Launch nationwide sponsored competitions like the MTN Music Challenge with instant airtime, data, and cash drops.
+          </p>
+          <ul class="pricing-perks-list">
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> 50,000+ Concurrent Tournament Players</li>
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Automated Airtime, Data &amp; Cash Payouts</li>
+            <li><span class="check"><svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span> Co-Branded Stage &amp; Live Campaign Analytics</li>
+          </ul>
+          <button class="pricing-action-btn" data-plan="Sponsored Brand Arena (Company)" type="button">
+            Partner With Clue <svg class="ui-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Section 7: Mobile App Download (iOS & Android + Interactive Phone HUD)
+         ===================================================================== -->
+    <section class="platform-section" id="finalCtaSection">
+      <div class="mobile-app-card" id="mobileAppSection">
+        <!-- Left Side: Copy, Store Buttons & QR Code -->
+        <div class="mobile-app-content">
+          <h2 class="mobile-app-title">
+            CLUE IN YOUR POCKET. <span class="highlight-iris">PLAY &amp; WIN ANYWHERE.</span>
+          </h2>
+          <p class="mobile-app-desc">
+            Download the Clue mobile app on iOS and Android to protect your 365-day streak, join live party rooms via PIN, and claim instant airtime and data rewards.
+          </p>
+
+          <!-- App Store & Google Play Buttons -->
+          <div class="store-buttons-row">
+            <button type="button" class="store-download-btn" data-store="Apple App Store">
+              <svg class="store-svg-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83zM15.97 6.33c.64-.78 1.08-1.86.96-2.94-.93.04-2.06.62-2.72 1.4-.58.68-1.1 1.79-.96 2.84 1.04.08 2.08-.52 2.72-1.3z"/>
+              </svg>
+              <div class="store-btn-text">
+                <span class="store-sub">Download on the</span>
+                <span class="store-name">App Store</span>
+              </div>
+            </button>
+
+            <button type="button" class="store-download-btn" data-store="Google Play Store">
+              <svg class="store-svg-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.37.6 1.23 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z"/>
+              </svg>
+              <div class="store-btn-text">
+                <span class="store-sub">GET IT ON</span>
+                <span class="store-name">Google Play</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- QR Scan & Mobile Perks Row -->
+          <div class="mobile-qr-strip">
+            <div class="qr-code-box" aria-label="Scan QR Code to Download Clue">
+              <svg viewBox="0 0 64 64" fill="currentColor">
+                <rect x="6" y="6" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="4"/>
+                <rect x="12" y="12" width="6" height="6"/>
+                <rect x="40" y="6" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="4"/>
+                <rect x="46" y="12" width="6" height="6"/>
+                <rect x="6" y="40" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="4"/>
+                <rect x="12" y="46" width="6" height="6"/>
+                <rect x="30" y="6" width="4" height="10"/>
+                <rect x="30" y="22" width="4" height="8"/>
+                <rect x="6" y="30" width="10" height="4"/>
+                <rect x="22" y="30" width="12" height="4"/>
+                <rect x="40" y="30" width="8" height="4"/>
+                <rect x="52" y="30" width="6" height="6"/>
+                <rect x="30" y="40" width="6" height="6"/>
+                <rect x="40" y="40" width="10" height="4"/>
+                <rect x="40" y="48" width="6" height="10"/>
+                <rect x="50" y="48" width="8" height="10"/>
+                <rect x="30" y="52" width="6" height="6"/>
+              </svg>
+            </div>
+            <div class="qr-strip-info">
+              <strong>Instant Camera Scan</strong>
+              <span>Point your phone camera at the QR code to install Clue on iOS or Android in seconds.</span>
+            </div>
+          </div>
+
+          <div class="cta-trust-row mobile-trust-row">
+            <span><svg class="ui-icon ui-icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Offline Exam Revision</span>
+            <span><svg class="ui-icon ui-icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 1-Tap Party PIN Join</span>
+            <span><svg class="ui-icon ui-icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Instant Airtime &amp; Data Alerts</span>
+          </div>
+        </div>
+
+        <!-- Right Side: Interactive Mobile Phone Frame Preview -->
+        <div class="mobile-phone-stage">
+          <div class="phone-device-frame">
+            <!-- Top Dynamic Island / Speaker Cutout -->
+            <div class="phone-notch-bar">
+              <span class="phone-time">09:41</span>
+              <span class="phone-island"></span>
+              <span class="phone-status-icons">5G</span>
+            </div>
+
+            <!-- App Top Header inside Phone -->
+            <div class="phone-app-header">
+              <div class="phone-brand-chip">
+                <img src="assets/clue-logo-nav.png" alt="Clue">
+                <span>CLUE MOBILE</span>
+              </div>
+              <div class="phone-hearts-pill" aria-label="3 Lives">
+                <svg class="ui-icon ui-icon-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <svg class="ui-icon ui-icon-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <svg class="ui-icon ui-icon-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </div>
+            </div>
+
+            <!-- Streak Widget inside Phone -->
+            <div class="phone-streak-card">
+              <div class="phone-streak-top">
+                <span class="streak-tag">ACTIVE HABIT ENGINE</span>
+                <span class="streak-days" id="phoneStreakDays">Day 42 / 365</span>
+              </div>
+              <div class="phone-streak-title">Daily 20-Question Target</div>
+              <div class="phone-progress-track">
+                <div class="phone-progress-fill" id="phoneProgressFill" style="width: 85%;"></div>
+              </div>
+              <div class="phone-streak-meta">
+                <span>17 / 20 Answered Today</span>
+                <strong>+₦1,500 Airtime Drop</strong>
+              </div>
+            </div>
+
+            <!-- Quick Game Modes Grid inside Phone -->
+            <div class="phone-mini-modes">
+              <div class="phone-mini-tile">
+                <span class="tile-kicker">REVISION</span>
+                <strong>CHEM 101 Quiz</strong>
+              </div>
+              <div class="phone-mini-tile">
+                <span class="tile-kicker">MUSIC</span>
+                <strong>Who Sang This?</strong>
+              </div>
+              <div class="phone-mini-tile">
+                <span class="tile-kicker">LIVE PIN</span>
+                <strong>Join Party #4092</strong>
+              </div>
+              <div class="phone-mini-tile">
+                <span class="tile-kicker">1v1 DUEL</span>
+                <strong>Rematch Eldad</strong>
+              </div>
+            </div>
+
+            <!-- Interactive Action inside Phone -->
+            <button type="button" class="phone-claim-btn" id="finalSignUpBtn">
+              <span>Simulate Mobile Streak Reward</span>
+              <svg class="ui-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div> <!-- /app-container -->
+
+  <!-- =====================================================================
+       Obsidian Pro Site Footer (GitHub Style Design System)
+       ===================================================================== -->
+  <footer class="gh-footer">
+    <div class="gh-footer-container">
+      
+      <!-- Top Row: Brand Icon & Newsletter Bar -->
+      <div class="gh-footer-top">
+        <a href="#" class="gh-footer-logo-link" aria-label="CLUE Home">
+          <img src="assets/clue-logo-nav.png" alt="CLUE" class="gh-logo-img">
+          <span class="gh-brand-wordmark">CLUE</span>
+        </a>
+
+        <div class="gh-newsletter-group">
+          <div class="gh-newsletter-tag">
+            <span class="gh-purple-bar"></span>
+            <span class="gh-newsletter-title">THE CLUE INTEL DISPATCH</span>
+          </div>
+          <button class="gh-subscribe-btn" id="footerSubscribeBtn">
+            Subscribe
+          </button>
+        </div>
+      </div>
+
+      <div class="gh-divider"></div>
+
+      <!-- Main Middle Area: Split 4 Columns + Right 3D Mascot Stage -->
+      <div class="gh-footer-main">
+        <div class="gh-links-grid">
+          <!-- Col 1: THE CLUE EXPERIENCE -->
+          <div class="gh-col">
+            <h4 class="gh-col-title">THE EXPERIENCE</h4>
+            <ul class="gh-col-links">
+              <li><a href="#pillarsSection" class="gh-link">Play Game Library</a></li>
+              <li><a href="#pillarsSection" class="gh-link">Structured Educational Tests</a></li>
+              <li><a href="#pillarsSection" class="gh-link">Brain Teasers &amp; Riddles</a></li>
+              <li><a href="#pillarsSection" class="gh-link">Three-Life &amp; Clue System</a></li>
+              <li><a href="#pillarsSection" class="gh-link">Daily, Weekly &amp; Monthly Targets</a></li>
+              <li><a href="#pillarsSection" class="gh-link">365-Day Streaks Engine</a></li>
+              <li><a href="#pillarsSection" class="gh-link">Clue AI System</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 2: GAME LIBRARY -->
+          <div class="gh-col">
+            <h4 class="gh-col-title">GAME LIBRARY</h4>
+            <ul class="gh-col-links">
+              <li><a href="#prizesSection" class="gh-link">Who Sang This? (Music)</a></li>
+              <li><a href="#prizesSection" class="gh-link">Finish the Lyrics</a></li>
+              <li><a href="#prizesSection" class="gh-link">What Movie Is This? (Cinema)</a></li>
+              <li><a href="#prizesSection" class="gh-link">Guess the Actor &amp; Character</a></li>
+              <li><a href="#prizesSection" class="gh-link">Memory, Logic &amp; Patterns</a></li>
+              <li><a href="#prizesSection" class="gh-link">Nigerian &amp; African Culture</a></li>
+              <li><a href="#prizesSection" class="gh-link">Arabic &amp; Multilingual Clue</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: PARTIES & COMMUNITIES -->
+          <div class="gh-col">
+            <h4 class="gh-col-title">PARTIES &amp; LIVE</h4>
+            <ul class="gh-col-links">
+              <li><a href="#interviewsSection" class="gh-link">Host a Clue Party (30+ Players)</a></li>
+              <li><a href="#interviewsSection" class="gh-link">Clue for Churches &amp; Fellowships</a></li>
+              <li><a href="#interviewsSection" class="gh-link">Bible Challenges &amp; Sunday School</a></li>
+              <li><a href="#interviewsSection" class="gh-link">Schools &amp; Universities</a></li>
+              <li><a href="#interviewsSection" class="gh-link">Clue Live Stream &amp; Shows</a></li>
+              <li><a href="#interviewsSection" class="gh-link">National Clue Championship</a></li>
+              <li><a href="#proofSection" class="gh-link">Clue Groups &amp; 1v1 Duels</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: REWARDS & BRANDS -->
+          <div class="gh-col">
+            <h4 class="gh-col-title">REWARDS &amp; BRANDS</h4>
+            <ul class="gh-col-links">
+              <li><a href="#howItWorksSection" class="gh-link">Airtime &amp; Mobile Data Drops</a></li>
+              <li><a href="#howItWorksSection" class="gh-link">Cash Payouts &amp; Food Vouchers</a></li>
+              <li><a href="#howItWorksSection" class="gh-link">Sponsored Brand Challenges</a></li>
+              <li><a href="#howItWorksSection" class="gh-link">MTN Music Challenge</a></li>
+              <li><a href="#howItWorksSection" class="gh-link">Restaurant &amp; Business Foot Traffic</a></li>
+              <li><a href="#pricingSection" class="gh-link">Plans &amp; Pricing</a></li>
+              <li><a href="#howItWorksSection" class="gh-link">Partner &amp; Sponsor Inquiries</a></li>
+              <li><a href="privacy.html" class="gh-link">Privacy Policy &amp; Data Protection</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Vertical Divider & Right 3D Character Mascot Stage -->
+        <div class="gh-mascot-stage">
+          <div class="gh-mascot-wrapper">
+            <img src="assets/footer-mascot.png" alt="CLUE 3D Mascot" class="gh-mascot-img">
+          </div>
+        </div>
+      </div>
+
+      <div class="gh-divider"></div>
+
+      <!-- Bottom Bar: Legal & Social Row -->
+      <div class="gh-footer-bottom">
+        <div class="gh-legal-left">
+          <span class="gh-legal-item">CLUE • THE KNOWLEDGE, GAMING &amp; SOCIAL PLATFORM &copy; 2026</span>
+          <span class="gh-legal-item" style="color: #a855f7;">NIGERIA &rarr; AFRICA &rarr; ASIA &rarr; GLOBAL</span>
+          <a href="#" class="gh-legal-link">TERMS OF USE</a>
+          <a href="privacy.html" class="gh-legal-link">PRIVACY POLICY</a>
+          <a href="#" class="gh-legal-link">COMMUNITY GUIDELINES</a>
+          <a href="#" class="gh-legal-link">BRAND PARTNERSHIPS</a>
+        </div>
+
+        <div class="gh-social-icons">
+          <!-- YouTube -->
+          <a href="#" class="gh-social-btn" aria-label="YouTube" title="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <!-- TikTok -->
+          <a href="#" class="gh-social-btn" aria-label="TikTok" title="TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-1.01-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+          <!-- Instagram -->
+          <a href="#" class="gh-social-btn" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <!-- X / Twitter -->
+          <a href="#" class="gh-social-btn" aria-label="X (formerly Twitter)" title="X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <!-- Discord -->
+          <a href="#" class="gh-social-btn" aria-label="Discord" title="Discord">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+          </a>
+        </div>
+      </div>
+       
+    </div>
+  </footer>
+
+  <!-- Persistent Floating Utility Controls Dock -->
+  <aside class="bottom-right">
+    <button class="sound-toggle-btn" id="soundToggleBtn" title="Toggle Sound & Ambient Music">
+      <svg class="sound-icon-on" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+      </svg>
+    </button>
+    <!-- <button class="view-mode-btn" id="referenceOverlayBtn" title="Toggle Reference Overlay Compare">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+        <circle cx="8.5" cy="8.5" r="1.5"/>
+        <polyline points="21 15 16 10 5 21"/>
+      </svg>
+      <span>Compare Original</span>
+    </button> -->
+  </aside>
+
+  <!-- Role Detail Modal / Spotlight Drawer -->
+  <div class="modal-backdrop" id="roleModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close">&times;</button>
+      <div class="modal-grid">
+        <div class="modal-preview-side" id="modalPreviewSide">
+          <!-- Rendered 3D Card Spotlight -->
+        </div>
+        <div class="modal-info-side">
+          <div class="modal-badge-row">
+            <span class="modal-side-badge" id="modalSideBadge">STRATEGY & AGILITY</span>
+            <div class="modal-rating-pill" id="modalRatingPill">
+              <span class="pill-medal"><svg class="ui-icon ui-icon-gold" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg></span>
+              <span id="modalRatingVal">4.9</span>
+            </div>
+          </div>
+          <h2 class="modal-role-title" id="modalRoleTitle">THE TACTICIAN</h2>
+          <p class="modal-role-role" id="modalRoleSummary">Mental Agility • High-Stakes Strategy</p>
+          
+          <div class="modal-stats-grid">
+            <div class="stat-box">
+              <span class="stat-label">DISCIPLINE</span>
+              <span class="stat-value" id="statTeam">Strategic Reasoning</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">MASTERY RATE</span>
+              <span class="stat-value" id="statWinRate">74.2%</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">COMPLEXITY</span>
+              <span class="stat-value" id="statDifficulty"><span class="star-rating-row"><svg class="ui-icon ui-icon-gold" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg class="ui-icon ui-icon-gold" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg class="ui-icon ui-icon-gold" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg class="ui-icon ui-icon-gold" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg class="ui-icon ui-icon-gold" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span></span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">LEARNER MODE</span>
+              <span class="stat-value" id="statPlayers">Competitive Duel</span>
+            </div>
+          </div>
+
+          <div class="modal-description-box">
+            <h4>Module Overview</h4>
+            <p id="modalRoleDesc">
+              High-tempo cognitive workouts that test working memory, rapid calculations, and game-theoretic strategy. Challenge adaptive problems under real-time conditions to cultivate mental speed and decisive focus.
+            </p>
+          </div>
+
+          <div class="modal-actions">
+            <button class="modal-primary-btn" id="modalSelectBtn">
+              Launch Challenge
+            </button>
+            <button class="modal-secondary-btn" id="modalAudioBtn">
+              Audio Walkthrough
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notifications Drawer -->
+  <div class="drawer-backdrop" id="notifDrawer" aria-hidden="true">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <h3>System Notifications</h3>
+        <button class="drawer-close" id="drawerClose">&times;</button>
+      </div>
+      <div class="drawer-body">
+        <div class="notif-item unread">
+          <div class="notif-icon gold"><svg class="ui-icon ui-icon-gold ui-icon-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg></div>
+          <div class="notif-content">
+            <h4>7-Day Streak Milestone!</h4>
+            <p>You maintained your daily habit: +1 Clue Extra Life (<span class="heart-triplet"><svg class="ui-icon ui-icon-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>) and 500 Clue Points credited.</p>
+            <span class="notif-time">10 minutes ago</span>
+          </div>
+        </div>
+        <div class="notif-item unread">
+          <div class="notif-icon purple"><svg class="ui-icon ui-icon-purple ui-icon-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.92 5h-2.1L12 12.18 19.18 5h-2.1L12 10.08 6.92 5zM12 13.82L4.82 21h2.1L12 15.92 17.08 21h2.1L12 13.82z"/></svg></div>
+          <div class="notif-content">
+            <h4>Eldad Challenged You!</h4>
+            <p>Eldad challenged you to a Music Challenge ("Who Sang This?"). Ready for a rematch?</p>
+            <span class="notif-time">1 hour ago</span>
+          </div>
+        </div>
+        <div class="notif-item">
+          <div class="notif-icon green"><svg class="ui-icon ui-icon-green ui-icon-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg></div>
+          <div class="notif-content">
+            <h4>MTN Music Challenge Live</h4>
+            <p>50,000 Cluers are competing for 12 months free data. Answer 10 questions today!</p>
+            <span class="notif-time">Yesterday</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ambient Looping Music Track -->
+  <audio id="bgAudio" src="assets/gigidelaromusic-calm-ether-loop-short-450954.mp3" loop preload="auto" playsinline crossorigin="anonymous"></audio>
+
+  <!-- GSAP 3 Animation Engine, ScrollTrigger, ScrollTo & Lenis Smooth Scroll -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
