@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://playclue.app/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://playclue.app/assets/card3.png</image:loc>
+      <image:title>CLUE • Speed Math Mental Arithmetic</image:title>
+      <image:caption>Clue Smart Interactive Educational Gaming Platform</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://playclue.app/assets/card1.png</image:loc>
+      <image:title>CLUE • Geo Nigeria 36 States Blitz</image:title>
+      <image:caption>Clue Nigerian Geography and Cultural Quest</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://playclue.app/privacy.html</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+</urlset>
+

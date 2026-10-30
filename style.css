@@ -1361,8 +1361,8 @@ body:not(.gsap-active) .fan-card:hover .full-card-art {
 
 .modal-role-role {
   font-size: 13.5px;
-  color: var(--text-secondary);
-  font-weight: 500;
+  color: #334155;
+  font-weight: 600;
   margin-bottom: 20px;
 }
 
@@ -1383,9 +1383,9 @@ body:not(.gsap-active) .fan-card:hover .full-card-art {
 .stat-label {
   display: block;
   font-size: 10.5px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.8px;
-  color: var(--text-muted);
+  color: #64748b;
   margin-bottom: 4px;
 }
 
@@ -1396,7 +1396,8 @@ body:not(.gsap-active) .fan-card:hover .full-card-art {
 }
 
 .modal-description-box {
-  background: rgba(0, 0, 0, 0.03);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-left: 3px solid #e11d48;
   padding: 12px 14px;
   border-radius: 0 10px 10px 0;
@@ -1405,15 +1406,18 @@ body:not(.gsap-active) .fan-card:hover .full-card-art {
 
 .modal-description-box h4 {
   font-size: 12px;
-  font-weight: 700;
-  color: #0a0a0c;
+  font-weight: 800;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   margin-bottom: 4px;
 }
 
 .modal-description-box p {
-  font-size: 12.5px;
-  line-height: 1.5;
-  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.55;
+  color: #000000;
+  font-weight: 500;
 }
 
 .modal-actions {
@@ -1441,20 +1445,61 @@ body:not(.gsap-active) .fan-card:hover .full-card-art {
 }
 
 .modal-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   padding: 12px 18px;
   background: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   color: #0a0a0c;
   border-radius: 9999px;
   font-family: var(--font-ui);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
 }
 
 .modal-secondary-btn:hover {
   background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.modal-secondary-btn.speaking {
+  background: #0f172a;
+  color: #38bdf8;
+  border-color: #38bdf8;
+}
+
+.modal-secondary-btn .audio-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-secondary-btn .audio-eq-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 14px;
+}
+
+.modal-secondary-btn .audio-eq-bars span {
+  width: 2.5px;
+  background-color: #38bdf8;
+  border-radius: 1px;
+  animation: eqBounce 0.8s ease-in-out infinite alternate;
+}
+
+.modal-secondary-btn .audio-eq-bars span:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+.modal-secondary-btn .audio-eq-bars span:nth-child(2) { height: 14px; animation-delay: 0.35s; }
+.modal-secondary-btn .audio-eq-bars span:nth-child(3) { height: 9px; animation-delay: 0.2s; }
+.modal-secondary-btn .audio-eq-bars span:nth-child(4) { height: 12px; animation-delay: 0.45s; }
+
+@keyframes eqBounce {
+  0% { height: 3px; }
+  100% { height: 14px; }
 }
 
 /* ==========================================================================
@@ -2895,6 +2940,572 @@ body:not(.gsap-active) .fan-card:hover .full-card-art {
 }
 
 /* ==========================================================================
+   Section 4.5: Pre-Employment & Civil Service Recruitment Platform
+   ========================================================================== */
+.recruitment-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: center;
+}
+
+.recruitment-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  width: 100%;
+}
+
+.recruitment-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-bottom: 3.5px solid #cbd5e1;
+  border-radius: 26px;
+  padding: 26px 22px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+  box-sizing: border-box;
+}
+
+.recruitment-card:hover {
+  transform: translateY(-4px);
+  border-color: #0f172a;
+  border-bottom-color: #0f172a;
+}
+
+.rec-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.rec-badge-tag {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3.5px 9.5px;
+  border-radius: 9999px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.rec-badge-tag.private-tag {
+  color: #4338ca;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+}
+
+.rec-badge-tag.gov-tag {
+  color: #047857;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+}
+
+.rec-badge-tag.anti-cheat-tag {
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+.rec-meta {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.rec-card-title {
+  font-family: var(--font-hero);
+  font-size: 18.5px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+.rec-card-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #475569;
+  margin-bottom: 18px;
+}
+
+.rec-perks-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 22px;
+  padding: 0;
+}
+
+.rec-perks-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #334155;
+}
+
+.rec-perks-list li strong {
+  color: #0f172a;
+}
+
+.rec-check-icon {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #eef2ff;
+  color: #4f46e5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.rec-check-icon svg {
+  width: 11px;
+  height: 11px;
+}
+
+.rec-action-btn {
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 9999px;
+  background: #0f172a;
+  color: #ffffff;
+  border: none;
+  border-bottom: 3.5px solid #000000;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+  transition: all 0.15s ease;
+}
+
+.rec-action-btn:hover {
+  background: #1e293b;
+  transform: translateY(-2px);
+  border-bottom-width: 4px;
+}
+
+.rec-action-btn:active {
+  transform: translateY(2px);
+  border-bottom-width: 1.5px;
+}
+
+.rec-action-btn svg {
+  width: 13px;
+  height: 13px;
+  fill: currentColor;
+}
+
+/* --------------------------------------------------------------------------
+   Recruiter HUD & Candidate Scorecard Simulation
+   -------------------------------------------------------------------------- */
+.recruiter-hud-card {
+  width: 100%;
+  background: #0f172a;
+  border: 1.5px solid #334155;
+  border-bottom: 4px solid #020617;
+  border-radius: 28px;
+  padding: 28px 30px;
+  box-sizing: border-box;
+  color: #ffffff;
+  margin-top: 8px;
+}
+
+.hud-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #1e293b;
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.hud-brand-tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-hero);
+  font-size: 13px;
+  letter-spacing: 0.8px;
+  color: #f8fafc;
+}
+
+.hud-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: inline-block;
+  box-shadow: none !important;
+}
+
+.hud-status-badge {
+  font-size: 10px;
+  font-weight: 800;
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  padding: 3px 9px;
+  border-radius: 9999px;
+}
+
+.hud-mode-toggle {
+  display: inline-flex;
+  background: #1e293b;
+  padding: 4px;
+  border-radius: 9999px;
+  gap: 4px;
+  border: 1px solid #334155;
+}
+
+.hud-tab {
+  padding: 7px 16px;
+  border-radius: 9999px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  color: #94a3b8;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hud-tab.active {
+  background: #4f46e5;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.hud-main-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 22px;
+  align-items: stretch;
+  margin-bottom: 22px;
+}
+
+.hud-candidate-col {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 20px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hud-candidate-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #334155;
+}
+
+.hud-avatar-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #4f46e5;
+  color: #ffffff;
+  font-family: var(--font-hero);
+  font-weight: 900;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hud-candidate-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.hud-candidate-details h4 {
+  font-family: var(--font-hero);
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.hud-candidate-id {
+  display: block;
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 2px;
+}
+
+.hud-role-target {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #facc15;
+}
+
+.hud-percentile-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(250, 204, 21, 0.12);
+  border: 1px solid rgba(250, 204, 21, 0.35);
+  padding: 5px 12px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.hud-percentile-pill .pct-val {
+  font-family: var(--font-hero);
+  font-size: 15px;
+  font-weight: 900;
+  color: #facc15;
+  line-height: 1.1;
+}
+
+.hud-percentile-pill .pct-lbl {
+  font-size: 9px;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+
+.hud-skills-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hud-skill-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.skill-name-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.skill-name-meta strong {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.skill-bar-track {
+  width: 100%;
+  height: 7px;
+  background: #0f172a;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #22c55e);
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}
+
+.hud-decision-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hud-audit-box {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 18px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.audit-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.audit-lbl {
+  color: #94a3b8;
+}
+
+.audit-val {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.audit-val.text-green {
+  color: #4ade80 !important;
+}
+
+.audit-val.text-gold {
+  color: #facc15 !important;
+}
+
+.hud-recommendation-box {
+  background: rgba(30, 41, 59, 0.7);
+  border: 1.5px dashed #475569;
+  border-radius: 18px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.rec-status-tag {
+  font-size: 10px;
+  font-weight: 800;
+  color: #94a3b8;
+  letter-spacing: 0.8px;
+}
+
+.hud-recommendation-box p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.hud-decision-badge {
+  font-family: var(--font-hero);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  background: #166534;
+  color: #bbf7d0;
+  border: 1px solid #22c55e;
+  padding: 8px 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.hud-footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  border-top: 1px solid #1e293b;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.hud-metrics-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11.5px;
+  color: #94a3b8;
+}
+
+.hud-dot {
+  color: #475569;
+}
+
+.hud-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hud-demo-btn {
+  background: #4f46e5;
+  color: #ffffff;
+  border: 1.5px solid #6366f1;
+  border-bottom: 3.5px solid #312e81;
+  border-radius: 9999px;
+  padding: 9px 18px;
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.hud-demo-btn:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+  border-bottom-width: 4px;
+}
+
+.hud-demo-btn:active {
+  transform: translateY(2px);
+  border-bottom-width: 1.5px;
+}
+
+.hud-whitepaper-btn {
+  background: transparent;
+  color: #e2e8f0;
+  border: 1.5px solid #475569;
+  border-radius: 9999px;
+  padding: 9px 18px;
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.hud-whitepaper-btn:hover {
+  border-color: #cbd5e1;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 1024px) {
+  .recruitment-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .hud-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .recruiter-hud-card {
+    padding: 20px 16px;
+  }
+  .hud-footer-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hud-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hud-demo-btn,
+  .hud-whitepaper-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ==========================================================================
    Section 5: How It Works & Progression Flow (100% Full-Bleed Royal Purple Section)
    ========================================================================== */
 #howItWorksSection {
@@ -3504,16 +4115,25 @@ body:not(.gsap-active) .fan-card:hover .full-card-art {
 }
 
 .qr-code-box {
-  width: 54px;
-  height: 54px;
+  width: 64px;
+  height: 64px;
   border-radius: 12px;
   background: #ffffff;
-  color: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
+  padding: 4px;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.qr-code-box .qr-code-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
 }
 
 .qr-code-box svg {
@@ -5997,5 +6617,128 @@ body:not(.gsap-active) .fan-card:hover .full-card-art {
   .cards-fan-deck {
     transform: scale(0.9);
     transform-origin: bottom center;
+  }
+}
+
+/* ==========================================================================
+   Privacy Policy Page: FAQ Accordion Section
+   ========================================================================== */
+.privacy-faq-section {
+  padding-top: 40px;
+  padding-bottom: 70px;
+}
+
+.privacy-faq-accordion {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.privacy-faq-item {
+  background: #0f172a;
+  border: 1.5px solid #1e293b;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.privacy-faq-item:hover {
+  border-color: #334155;
+}
+
+.privacy-faq-item.active {
+  border-color: #6366f1;
+  background: #111827;
+}
+
+.faq-question-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-family: var(--font-ui);
+  font-size: 15.5px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.faq-question-btn:hover {
+  color: #e0e7ff;
+}
+
+.privacy-faq-item.active .faq-question-btn {
+  color: #ffffff;
+}
+
+.faq-icon-wrapper {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, border-color 0.2s ease;
+}
+
+.faq-icon-wrapper svg {
+  width: 15px;
+  height: 15px;
+  color: #94a3b8;
+  transition: color 0.2s ease;
+}
+
+.privacy-faq-item.active .faq-icon-wrapper {
+  transform: rotate(180deg);
+  background: #4f46e5;
+  border-color: #6366f1;
+}
+
+.privacy-faq-item.active .faq-icon-wrapper svg {
+  color: #ffffff;
+}
+
+.faq-answer-panel {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 24px;
+  transition: max-height 0.35s ease, padding 0.35s ease, opacity 0.25s ease;
+  opacity: 0;
+}
+
+.privacy-faq-item.active .faq-answer-panel {
+  max-height: 320px;
+  padding: 0 24px 22px 24px;
+  opacity: 1;
+}
+
+.faq-answer-panel p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #cbd5e1;
+}
+
+@media (max-width: 640px) {
+  .faq-question-btn {
+    padding: 16px 18px;
+    font-size: 14px;
+  }
+  .faq-answer-panel {
+    padding: 0 18px;
+  }
+  .privacy-faq-item.active .faq-answer-panel {
+    padding: 0 18px 18px 18px;
   }
 }

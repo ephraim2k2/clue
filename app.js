@@ -109,59 +109,33 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // Ambient Background Music Player (assets/gigidelaromusic-calm-ether-loop-short-450954.mp3)
-  // Continuous, robust, gapless looping engine
+  // Background Audio Controller (assets/gigidelaromusic-calm-ether-loop-short-450954.mp3)
+  // Default: OFF / Silent. Controlled only by user toggle.
   // =========================================================================
   const bgAudio = document.getElementById('bgAudio');
-  let musicEnabled = true;
-  let isManuallyPaused = false;
+  let musicEnabled = false;
+  let isManuallyPaused = true;
 
-  // Set rich, audible, pleasant background volume (0.60)
   if (bgAudio) {
-    bgAudio.volume = 0.60;
-    bgAudio.loop = true;
-
-    // Handle seamless loop restart when audio reaches track end
-    bgAudio.addEventListener('ended', () => {
-      if (musicEnabled && !isManuallyPaused) {
-        bgAudio.currentTime = 0;
-        bgAudio.play().catch(() => {});
-      }
-    });
-
-    // Proactive loop re-trigger to prevent end-of-track stalls or encoder gap hitches
-    bgAudio.addEventListener('timeupdate', () => {
-      if (musicEnabled && !isManuallyPaused && bgAudio.duration > 0) {
-        if (bgAudio.currentTime >= bgAudio.duration - 0.08) {
-          bgAudio.currentTime = 0;
-          if (bgAudio.paused) {
-            bgAudio.play().catch(() => {});
-          }
-        }
-      }
-    });
-
-    // Auto-resume if accidentally paused by system hitch while musicEnabled
-    bgAudio.addEventListener('pause', () => {
-      if (musicEnabled && !isManuallyPaused) {
-        setTimeout(() => {
-          if (musicEnabled && !isManuallyPaused && bgAudio.paused) {
-            bgAudio.play().catch(() => {});
-          }
-        }, 120);
-      }
-      updateSoundUI();
-    });
+    bgAudio.pause();
+    bgAudio.currentTime = 0;
+    bgAudio.loop = false;
+    bgAudio.volume = 0.50;
 
     bgAudio.addEventListener('play', () => {
       updateSoundUI();
     });
 
-    bgAudio.addEventListener('error', (e) => {
-      console.warn('Audio element error encountered, reloading stream...', e);
+    bgAudio.addEventListener('pause', () => {
+      updateSoundUI();
+    });
+
+    bgAudio.addEventListener('ended', () => {
       if (musicEnabled && !isManuallyPaused) {
-        bgAudio.load();
+        bgAudio.currentTime = 0;
         bgAudio.play().catch(() => {});
+      } else {
+        updateSoundUI();
       }
     });
   }
@@ -170,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!bgAudio) return;
     musicEnabled = true;
     isManuallyPaused = false;
-    bgAudio.volume = 0.60;
+    bgAudio.volume = 0.50;
     bgAudio.loop = true;
 
     const playPromise = bgAudio.play();
@@ -178,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
       playPromise.then(() => {
         updateSoundUI();
       }).catch(() => {
-        // Autoplay policy delayed until user gesture
         updateSoundUI();
       });
     }
@@ -189,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
     isManuallyPaused = true;
     musicEnabled = false;
     bgAudio.pause();
+    bgAudio.currentTime = 0;
     updateSoundUI();
   }
 
@@ -1175,9 +1149,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function openRoleModal(roleKey) {
-    const data = ROLES[roleKey];
+    if (roleKey && ROLES[roleKey]) {
+      activeRoleKey = roleKey;
+    }
+    const data = ROLES[activeRoleKey];
     if (!data) return;
 
+    stopAudioWalkthrough();
     playSwitchSnap();
 
     // Populate modal fields
@@ -1229,6 +1207,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeRoleModal() {
+    stopAudioWalkthrough();
     if (hasGSAP) {
       gsap.to('.modal-card', {
         scale: 0.88,
@@ -1269,10 +1248,135 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // =========================================================================
+  // Role Modal Audio Walkthrough (Web Speech API Engine)
+  // =========================================================================
+  let isSpeakingWalkthrough = false;
+  let currentWalkthroughUtterance = null;
+
+  function stopAudioWalkthrough() {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    isSpeakingWalkthrough = false;
+    currentWalkthroughUtterance = null;
+    if (modalAudioBtn) {
+      modalAudioBtn.classList.remove('speaking');
+      const textSpan = modalAudioBtn.querySelector('.audio-btn-text');
+      const eqBars = modalAudioBtn.querySelector('.audio-eq-bars');
+      const iconSpan = modalAudioBtn.querySelector('.audio-btn-icon');
+      if (textSpan) textSpan.textContent = 'Audio Walkthrough';
+      if (eqBars) eqBars.style.display = 'none';
+      if (iconSpan) iconSpan.style.display = 'inline-flex';
+    }
+  }
+
+  function getBestSpeechVoice() {
+    if (!('speechSynthesis' in window)) return null;
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices || voices.length === 0) return null;
+
+    // Prioritize natural male voices across macOS, iOS, Windows, Android, and Chrome
+    const maleNamePatterns = [
+      'daniel', 'david', 'guy', 'ryan', 'george', 'oliver', 'alex', 'fred',
+      'arthur', 'tom', 'rishi', 'mark', 'google uk english male', 'male'
+    ];
+
+    // Active exclusion for known female voices
+    const femaleNamePatterns = [
+      'samantha', 'victoria', 'karen', 'moira', 'tessa', 'ava', 'allison', 
+      'susan', 'zoe', 'nicky', 'fiona', 'kate', 'serena', 'stephanie',
+      'zira', 'jenny', 'aria', 'hazel', 'libby', 'sonia', 'mia', 'neerja',
+      'female'
+    ];
+
+    const englishVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+    const candidates = englishVoices.length > 0 ? englishVoices : voices;
+
+    // 1. First priority: Confirmed English male voice
+    const maleVoice = candidates.find(v => {
+      const name = (v.name + ' ' + (v.voiceURI || '')).toLowerCase();
+      const isMale = maleNamePatterns.some(pattern => name.includes(pattern));
+      const isFemale = femaleNamePatterns.some(pattern => name.includes(pattern));
+      return isMale && !isFemale;
+    });
+
+    if (maleVoice) return maleVoice;
+
+    // 2. Second priority: Any natural English voice that is not marked female
+    const nonFemaleVoice = candidates.find(v => {
+      const name = (v.name + ' ' + (v.voiceURI || '')).toLowerCase();
+      return !femaleNamePatterns.some(pattern => name.includes(pattern));
+    });
+
+    return nonFemaleVoice || candidates[0];
+  }
+
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = () => {
+      getBestSpeechVoice();
+    };
+  }
+
+  function toggleAudioWalkthrough() {
+    if (!('speechSynthesis' in window)) {
+      triggerToast('Audio speech engine is not supported in this browser.');
+      return;
+    }
+
+    if (isSpeakingWalkthrough || window.speechSynthesis.speaking) {
+      stopAudioWalkthrough();
+      triggerToast('Audio walkthrough stopped.');
+      return;
+    }
+
+    const data = ROLES[activeRoleKey] || ROLES['werewolf'];
+    window.speechSynthesis.cancel();
+
+    const narrative = `Welcome to Clue's ${data.name} module. Category: ${data.side}. ${data.roleSummary}. Module overview: ${data.desc} Player configuration: ${data.players}, with an average tournament win rate of ${data.winRate}. Review your strategy, track the countdown clock, and launch challenge when you are ready.`;
+
+    const utterance = new SpeechSynthesisUtterance(narrative);
+    currentWalkthroughUtterance = utterance;
+    utterance.rate = 0.95;
+    utterance.pitch = 0.98; // Resonant, clear natural male pitch register
+    utterance.volume = 1.0;
+
+    const voice = getBestSpeechVoice();
+    if (voice) {
+      utterance.voice = voice;
+    }
+
+    utterance.onstart = () => {
+      isSpeakingWalkthrough = true;
+      if (modalAudioBtn) {
+        modalAudioBtn.classList.add('speaking');
+        const textSpan = modalAudioBtn.querySelector('.audio-btn-text');
+        const eqBars = modalAudioBtn.querySelector('.audio-eq-bars');
+        const iconSpan = modalAudioBtn.querySelector('.audio-btn-icon');
+        if (textSpan) textSpan.textContent = 'Stop Audio';
+        if (eqBars) eqBars.style.display = 'inline-flex';
+        if (iconSpan) iconSpan.style.display = 'none';
+      }
+      triggerToast(`Narrating ${data.name} briefing...`);
+    };
+
+    utterance.onend = () => {
+      stopAudioWalkthrough();
+    };
+
+    utterance.onerror = (e) => {
+      if (e.error !== 'interrupted' && e.error !== 'canceled') {
+        stopAudioWalkthrough();
+      }
+    };
+
+    window.speechSynthesis.speak(utterance);
+  }
+
   if (modalAudioBtn) {
     modalAudioBtn.addEventListener('click', () => {
       playSwitchSnap();
-      triggerToast(`Playing ${ROLES[activeRoleKey].name} audio walkthrough...`);
+      toggleAudioWalkthrough();
     });
   }
 
@@ -1385,30 +1489,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   const unlockAudioOnGesture = () => {
     initAudio();
-    if (musicEnabled && !isManuallyPaused && bgAudio && bgAudio.paused) {
-      startAmbientMusic();
-    }
-    // If audio playback is active, detach global unlock listeners
-    if (bgAudio && !bgAudio.paused) {
-      ['pointerdown', 'touchstart', 'click', 'keydown', 'wheel'].forEach((evt) => {
-        document.removeEventListener(evt, unlockAudioOnGesture, true);
-      });
-    }
   };
 
-  ['pointerdown', 'touchstart', 'click', 'keydown', 'wheel'].forEach((evt) => {
-    document.addEventListener(evt, unlockAudioOnGesture, true);
+  ['pointerdown', 'touchstart', 'click', 'keydown'].forEach((evt) => {
+    document.addEventListener(evt, unlockAudioOnGesture, { once: true, passive: true });
   });
-
-  // Attempt initial playback immediately if browser allows autoplay
-  try {
-    startAmbientMusic();
-  } catch (e) {
-    // Waiting for first user gesture
-  }
 
   const soundToggleBtn = document.getElementById('soundToggleBtn');
   if (soundToggleBtn) {
+    updateSoundUI();
     soundToggleBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       toggleSoundAndMusic();
@@ -2061,6 +2150,165 @@ document.addEventListener('DOMContentLoaded', () => {
         switchLibraryEngine('duels');
         triggerToast('1v1 Match Connected vs Tunde O. (UNILAG)! 4 seconds on clock!');
       }, 2850);
+    });
+  }
+
+  // =========================================================================
+  // Section 4.5: Recruitment & Talent Screening Interactive HUD
+  // =========================================================================
+  const recTabCorporate = document.getElementById('recTabCorporate');
+  const recTabGov = document.getElementById('recTabGov');
+  const hudCandidateInitials = document.getElementById('hudCandidateInitials');
+  const hudCandidateName = document.getElementById('hudCandidateName');
+  const hudCandidateId = document.getElementById('hudCandidateId');
+  const hudCandidateRole = document.getElementById('hudCandidateRole');
+  const hudPercentileVal = document.getElementById('hudPercentileVal');
+  const skill1Name = document.getElementById('skill1Name');
+  const skill1Score = document.getElementById('skill1Score');
+  const skill1Fill = document.getElementById('skill1Fill');
+  const skill2Name = document.getElementById('skill2Name');
+  const skill2Score = document.getElementById('skill2Score');
+  const skill2Fill = document.getElementById('skill2Fill');
+  const skill3Name = document.getElementById('skill3Name');
+  const skill3Score = document.getElementById('skill3Score');
+  const skill3Fill = document.getElementById('skill3Fill');
+  const skill4Name = document.getElementById('skill4Name');
+  const skill4Score = document.getElementById('skill4Score');
+  const skill4Fill = document.getElementById('skill4Fill');
+  const hudTestType = document.getElementById('hudTestType');
+  const hudRecComment = document.getElementById('hudRecComment');
+  const hudDecisionBadge = document.getElementById('hudDecisionBadge');
+
+  const RECRUITMENT_PROFILES = {
+    corporate: {
+      initials: 'DE',
+      name: 'Damilola E.',
+      id: 'Candidate #NG-92841 • Lagos Cohort',
+      role: 'Graduate Trainee • Commercial Bank',
+      percentile: 'Top 1.2%',
+      testType: '20-Question Speed Test',
+      comment: 'Answered quickly and accurately with zero tab switches or cheating attempts.',
+      decision: 'RECOMMENDED FOR INTERVIEW',
+      decisionColor: '#166534',
+      skills: [
+        { name: 'Quick Math', score: '98% (Avg 1.4s)', fill: '98%' },
+        { name: 'Logic & Reasoning', score: '94% (Avg 2.2s)', fill: '94%' },
+        { name: 'Digital & Cyber Skills', score: '100% (Avg 1.8s)', fill: '100%' },
+        { name: 'Work Ethics', score: '91% (Avg 3.1s)', fill: '91%' }
+      ]
+    },
+    gov: {
+      initials: 'OA',
+      name: 'Olawale A.',
+      id: 'Candidate #FED-40192 • Civil Service Commission',
+      role: 'Admin Officer • Ministry of Finance',
+      percentile: 'Top 0.8%',
+      testType: '30-Question Civil Service Test',
+      comment: 'Strong score in civic knowledge, public rules, and ethics. Zero cheat flags.',
+      decision: 'RECOMMENDED FOR FINAL HIRING',
+      decisionColor: '#065f46',
+      skills: [
+        { name: 'Civic Knowledge', score: '97% (Avg 1.6s)', fill: '97%' },
+        { name: 'Public Rules & Math', score: '95% (Avg 2.0s)', fill: '95%' },
+        { name: 'Civil Ethics', score: '100% (Avg 1.5s)', fill: '100%' },
+        { name: 'Reading & Reasoning', score: '96% (Avg 2.4s)', fill: '96%' }
+      ]
+    }
+  };
+
+  function setRecruitmentMode(mode) {
+    const data = RECRUITMENT_PROFILES[mode];
+    if (!data) return;
+    playSwitchSnap();
+
+    if (recTabCorporate) {
+      recTabCorporate.classList.toggle('active', mode === 'corporate');
+      recTabCorporate.setAttribute('aria-selected', mode === 'corporate' ? 'true' : 'false');
+    }
+    if (recTabGov) {
+      recTabGov.classList.toggle('active', mode === 'gov');
+      recTabGov.setAttribute('aria-selected', mode === 'gov' ? 'true' : 'false');
+    }
+
+    if (hudCandidateInitials) hudCandidateInitials.textContent = data.initials;
+    if (hudCandidateName) hudCandidateName.textContent = data.name;
+    if (hudCandidateId) hudCandidateId.textContent = data.id;
+    if (hudCandidateRole) hudCandidateRole.textContent = data.role;
+    if (hudPercentileVal) hudPercentileVal.textContent = data.percentile;
+    if (hudTestType) hudTestType.textContent = data.testType;
+    if (hudRecComment) hudRecComment.textContent = data.comment;
+    if (hudDecisionBadge) {
+      hudDecisionBadge.textContent = data.decision;
+      hudDecisionBadge.style.background = data.decisionColor;
+    }
+
+    if (skill1Name) skill1Name.textContent = data.skills[0].name;
+    if (skill1Score) skill1Score.textContent = data.skills[0].score;
+    if (skill1Fill) skill1Fill.style.width = data.skills[0].fill;
+
+    if (skill2Name) skill2Name.textContent = data.skills[1].name;
+    if (skill2Score) skill2Score.textContent = data.skills[1].score;
+    if (skill2Fill) skill2Fill.style.width = data.skills[1].fill;
+
+    if (skill3Name) skill3Name.textContent = data.skills[2].name;
+    if (skill3Score) skill3Score.textContent = data.skills[2].score;
+    if (skill3Fill) skill3Fill.style.width = data.skills[2].fill;
+
+    if (skill4Name) skill4Name.textContent = data.skills[3].name;
+    if (skill4Score) skill4Score.textContent = data.skills[3].score;
+    if (skill4Fill) skill4Fill.style.width = data.skills[3].fill;
+
+    const hudCard = document.querySelector('.recruiter-hud-card');
+    if (hasGSAP && hudCard) {
+      gsap.fromTo(hudCard, { scale: 0.985 }, { scale: 1, duration: 0.35, ease: 'back.out(1.4)' });
+    }
+  }
+
+  if (recTabCorporate) {
+    recTabCorporate.addEventListener('click', () => setRecruitmentMode('corporate'));
+  }
+  if (recTabGov) {
+    recTabGov.addEventListener('click', () => setRecruitmentMode('gov'));
+  }
+
+  // Recruitment action buttons
+  const recActionBtns = document.querySelectorAll('.rec-action-btn');
+  recActionBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const recType = btn.dataset.recType;
+      playCoinChime();
+      if (recType === 'corporate') {
+        triggerToast('Corporate Assessment Suite selected! Custom graduate trainee packs ready.');
+      } else if (recType === 'government') {
+        triggerToast('Civil Service Examination Portal opened! Mass nationwide test engine ready.');
+      } else {
+        triggerToast('Anti-Cheat 7s Blitz Architecture active! 99.8% cheat resistance verified.');
+      }
+      if (hasGSAP) {
+        gsap.fromTo(btn, { scale: 0.95 }, { scale: 1, duration: 0.35, ease: 'elastic.out(1.3, 0.4)' });
+      }
+    });
+  });
+
+  const btnRecruiterDemo = document.getElementById('btnRecruiterDemo');
+  if (btnRecruiterDemo) {
+    btnRecruiterDemo.addEventListener('click', () => {
+      playCoinChime();
+      triggerToast('Recruiter Demo Request registered! Our enterprise talent team will contact you.');
+      if (hasGSAP) {
+        gsap.fromTo(btnRecruiterDemo, { scale: 0.94 }, { scale: 1, duration: 0.35, ease: 'elastic.out(1.4, 0.4)' });
+      }
+    });
+  }
+
+  const btnRecruiterWhitepaper = document.getElementById('btnRecruiterWhitepaper');
+  if (btnRecruiterWhitepaper) {
+    btnRecruiterWhitepaper.addEventListener('click', () => {
+      playSwitchSnap();
+      triggerToast('Downloading "CLUE Pre-Employment Screening & Anti-Cheat Framework.pdf"...');
+      if (hasGSAP) {
+        gsap.fromTo(btnRecruiterWhitepaper, { scale: 0.95 }, { scale: 1, duration: 0.3, ease: 'power2.out' });
+      }
     });
   }
 

@@ -1,0 +1,7 @@
+# robots.txt for CLUE Educational Gaming Platform
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://playclue.app/sitemap.xml
+
