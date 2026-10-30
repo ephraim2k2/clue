@@ -9,84 +9,84 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   const ROLES = {
     werewolf: {
-      name: 'THE TACTICIAN',
-      side: 'BRAIN GAMES & 3-LIVES',
+      name: 'SPEED MATH',
+      side: 'MENTAL ARITHMETIC',
       rating: '4.9',
-      roleSummary: '3-Life System (3 Lives Tension) • Logic & Speed Drills',
+      roleSummary: 'Lightning Calculation • Numbers, Operations & Speed Drills',
       team: 'Cognitive Arena',
-      winRate: '76.4%',
+      winRate: '88.4%',
       difficultyStars: 5,
       players: '1v1 & Solo Arena',
-      image: 'assets/card-werewolf.png',
-      color: '#f43f5e',
-      desc: 'Clue\'s signature 3-life game system. Every wrong answer costs a life. Tackle memory tests, pattern detection, word games, and speed challenges with adaptive hints: "You\'re getting close..."',
-      heroTop: 'THE TACTICIAN.',
-      heroBottom: 'BRAIN & 3-LIVES. <span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.',
-      heroSub: 'Solve brain teasers, riddles, logic games, and unexpected speed challenges under the tension of a three-life countdown.'
+      image: 'assets/card3.png',
+      color: '#f59e0b',
+      desc: 'Clue\'s lightning-fast arithmetic arena. Race against the clock and live opponents to solve rapid-fire math, equations, and number sequences under three-life tournament pressure.',
+      heroTop: 'SPEED MATH.',
+      heroBottom: '<span class="hero-line hero-line-compete">MENTAL ARITHMETIC.</span> <span class="hero-line hero-line-quest"><span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.</span>',
+      heroSub: 'Lightning-fast calculations, arithmetic drills, and numbers challenges under the tension of a three-life countdown.'
     },
     seer: {
-      name: 'THE MAESTRO',
-      side: 'MUSIC & CINEMA GAMES',
+      name: 'PHISH HUNTER',
+      side: 'CYBER AWARENESS',
       rating: '4.8',
-      roleSummary: 'Who Sang This? • Guess the Actor & Quote',
-      team: 'Entertainment Suite',
+      roleSummary: 'Spot the Scam • Phishing Emails, URLs & Social Engineering',
+      team: 'Digital Security Suite',
       winRate: '84.1%',
-      difficultyStars: 3,
+      difficultyStars: 4,
       players: 'Party & Multiplayer',
-      image: 'assets/char-seer.jpg',
-      color: '#c084fc',
-      desc: 'Audio and visual entertainment engines: "Who Sang This?", "Guess the Song", "Finish the Lyrics", "What Movie Is This?", and "Complete the Quote" spanning Afrobeats, Nollywood, Hollywood, and global pop culture.',
-      heroTop: 'THE MAESTRO.',
-      heroBottom: 'MUSIC & MOVIES. <span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.',
-      heroSub: 'From Afrobeats to cinema blockbusters. Test your ear and eye with music snippets, lyric riddles, and movie quote challenges.'
+      image: 'assets/card2.png',
+      color: '#06b6d4',
+      desc: 'Inspect suspicious emails, malicious links, deceptive SMS alerts, and social engineering attacks. Train your eye to detect red flags and protect digital assets in real time.',
+      heroTop: 'PHISH HUNTER.',
+      heroBottom: '<span class="hero-line hero-line-compete">CYBER AWARENESS.</span> <span class="hero-line hero-line-quest"><span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.</span>',
+      heroSub: 'Identify phishing lures, fake websites, and deceptive scams with sharp forensic analysis and real-world scenario drills.'
     },
     oldman: {
-      name: 'THE SCHOLAR',
-      side: 'STRUCTURED TESTS',
+      name: 'GEO NIGERIA',
+      side: '36 STATES BLITZ',
       rating: '4.9',
-      roleSummary: 'Primary • Secondary • University (Course → Topic → Test)',
-      team: 'Curriculum & Assessment',
-      winRate: '79.5%',
+      roleSummary: '36 States & FCT • Capitals, Landmarks, Minerals & Culture',
+      team: 'Geographic Exploration',
+      winRate: '82.5%',
       difficultyStars: 4,
       players: 'Diagnostic & Revision',
-      image: 'assets/char-oldman.jpg',
-      color: '#f97316',
-      desc: 'Serious curriculum learning and assessment. Practice Primary and Secondary exams, and University degree topics: Course → Topic → Test (e.g., CHEM 101 → Atomic Structure → 20 Questions). Tracks performance and identifies weak areas.',
-      heroTop: 'THE SCHOLAR.',
-      heroBottom: 'LEARN & ASSESS. <span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.',
-      heroSub: 'Master your academic exams from primary school to university courses. Structured tests with diagnostic tracking for students and tutors.'
+      image: 'assets/card1.png',
+      color: '#10b981',
+      desc: 'Master the geography of Nigeria from the Sahel to the Niger Delta. Explore state capitals, ethnic heritage, national landmarks, topography, and geopolitical zones in fast-paced blitz rounds.',
+      heroTop: 'GEO NIGERIA.',
+      heroBottom: '<span class="hero-line hero-line-compete">36 STATES BLITZ.</span> <span class="hero-line hero-line-quest"><span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.</span>',
+      heroSub: 'Explore Nigeria\'s 36 states, historical landmarks, mineral resources, and geopolitical zones in an interactive cartographic quest.'
     },
     witch: {
-      name: 'THE DISCOVERER',
-      side: 'CULTURE & FAITH',
-      rating: '4.8',
-      roleSummary: 'Nigerian & African Culture • Religion & Arabic',
-      team: 'Heritage & World Knowledge',
-      winRate: '81.2%',
-      difficultyStars: 3,
-      players: 'Discovery Quest',
-      image: 'assets/char-witch.jpg',
-      color: '#10b981',
-      desc: 'Explore Nigerian and African culture, world religions (Christianity, Islam, mythology), and Arabic language challenges. Move seamlessly from football and history to food, traditions, and faith.',
-      heroTop: 'THE DISCOVERER.',
-      heroBottom: 'CULTURE & HERITAGE. <span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.',
-      heroSub: 'Explore African culture, world history, faith, traditions, and multilingual Arabic challenges in one rich knowledge ecosystem.'
+      name: 'NEXT LEVEL ACCESS',
+      side: 'BUSINESS & FINANCE',
+      rating: '4.9',
+      roleSummary: 'Capital, Markets, Wealth Creation & Executive Decisions',
+      team: 'Enterprise & Economics',
+      winRate: '85.2%',
+      difficultyStars: 4,
+      players: 'Executive Arena',
+      image: 'assets/card4.png',
+      color: '#a855f7',
+      desc: 'Unlock business acumen and financial literacy. Test your knowledge of venture capital, stock markets, budgeting, corporate leadership, and wealth generation strategies.',
+      heroTop: 'NEXT LEVEL ACCESS.',
+      heroBottom: '<span class="hero-line hero-line-compete">BUSINESS & FINANCE.</span> <span class="hero-line hero-line-quest"><span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.</span>',
+      heroSub: 'Master capital allocation, corporate finance, market dynamics, and leadership strategy to unlock elite access.'
     },
     hunter: {
-      name: 'THE CHAMPION',
-      side: 'PARTIES & DUELS',
-      rating: '4.7',
-      roleSummary: '30-Player Parties • 1v1 Duels • Airtime & Cash',
-      team: 'Live Arenas & Events',
-      winRate: '77.0%',
-      difficultyStars: 4,
-      players: 'Party & Live Stream',
-      image: 'assets/char-hunter.jpg',
-      color: '#eab308',
-      desc: 'Host interactive Clue Parties for 30+ players on their smartphones, join brand arenas like the MTN Music Challenge, and compete in Church and University derbies for airtime, data, and cash prizes.',
-      heroTop: 'THE CHAMPION.',
-      heroBottom: 'COMPETE & WIN. <span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.',
-      heroSub: 'Turn gatherings into live game shows. Challenge friends, maintain daily streaks, and win real-world airtime, data, and prizes.'
+      name: 'CYBER PULSE',
+      side: 'ZERO-DAY DEFENSE',
+      rating: '4.8',
+      roleSummary: 'Network Defense • Firewalls, Encryption & Threat Mitigation',
+      team: 'Elite Cyber Arena',
+      winRate: '79.0%',
+      difficultyStars: 5,
+      players: 'Live Arenas & Derbies',
+      image: 'assets/card5.png',
+      color: '#3b82f6',
+      desc: 'Step into frontline defensive cybersecurity. Intercept zero-day exploits, configure security shields, crack encryption challenges, and safeguard African critical infrastructure.',
+      heroTop: 'CYBER PULSE.',
+      heroBottom: '<span class="hero-line hero-line-compete">ZERO-DAY DEFENSE.</span> <span class="hero-line hero-line-quest"><span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.</span>',
+      heroSub: 'Shield networks against live digital threats, neutralize zero-day vulnerabilities, and lead cyber defense operations.'
     }
   };
 
@@ -298,6 +298,69 @@ document.addEventListener('DOMContentLoaded', () => {
     osc.stop(now + 0.03);
   }
 
+  // Card Riffle & Shuffle Sound
+  function playCardShuffleSound() {
+    if (!soundEnabled) return;
+    initAudio();
+    if (!audioCtx) return;
+
+    const now = audioCtx.currentTime;
+    for (let i = 0; i < 8; i++) {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(450 + Math.random() * 650, now + i * 0.032);
+      osc.frequency.exponentialRampToValueAtTime(140, now + i * 0.032 + 0.045);
+      gain.gain.setValueAtTime(0.14, now + i * 0.032);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.032 + 0.045);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now + i * 0.032);
+      osc.stop(now + i * 0.032 + 0.05);
+    }
+  }
+
+  // Matchmaking Radar Sweep Sound
+  function playRadarSweepSound() {
+    if (!soundEnabled) return;
+    initAudio();
+    if (!audioCtx) return;
+
+    for (let s = 0; s < 3; s++) {
+      const now = audioCtx.currentTime + s * 0.7;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(580, now);
+      osc.frequency.exponentialRampToValueAtTime(1160, now + 0.28);
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.36);
+    }
+  }
+
+  // Short Countdown / System Beep
+  function playBeep(freq = 440) {
+    if (!soundEnabled) return;
+    initAudio();
+    if (!audioCtx) return;
+
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, now);
+    gain.gain.setValueAtTime(0.18, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + 0.13);
+  }
+
   // Card Promotion Swoosh
   function playCardSelectSound() {
     if (!soundEnabled) return;
@@ -316,6 +379,118 @@ document.addEventListener('DOMContentLoaded', () => {
     gain.connect(audioCtx.destination);
     osc.start(now);
     osc.stop(now + 0.14);
+  }
+
+  // =========================================================================
+  // Gold Coin Particle Cascade Engine (Hardware-Accelerated HTML5 Canvas)
+  // =========================================================================
+  const coinCanvas = document.getElementById('coinFxCanvas');
+  const coinCtx = coinCanvas ? coinCanvas.getContext('2d') : null;
+  let activeCoins = [];
+  let coinAnimId = null;
+
+  function resizeCoinCanvas() {
+    if (!coinCanvas) return;
+    coinCanvas.width = window.innerWidth;
+    coinCanvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCoinCanvas, { passive: true });
+  resizeCoinCanvas();
+
+  function spawnCoinBurst(originX, originY, count = 24) {
+    if (!coinCanvas || !coinCtx) return;
+    resizeCoinCanvas();
+    playCoinChime();
+
+    const pill = document.getElementById('coinsPill');
+    const targetRect = pill ? pill.getBoundingClientRect() : { left: window.innerWidth - 120, top: 30 };
+    const destX = targetRect.left + 25;
+    const destY = targetRect.top + 15;
+
+    for (let i = 0; i < count; i++) {
+      const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.4;
+      const speed = 4 + Math.random() * 8;
+      activeCoins.push({
+        x: originX,
+        y: originY,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 5.5,
+        size: 9 + Math.random() * 5,
+        rot: Math.random() * Math.PI,
+        vrot: (Math.random() - 0.5) * 0.35,
+        life: 0,
+        maxLife: 60 + Math.random() * 15,
+        destX: destX,
+        destY: destY
+      });
+    }
+
+    if (!coinAnimId) {
+      runCoinLoop();
+    }
+  }
+
+  function runCoinLoop() {
+    if (!coinCtx || !coinCanvas) return;
+    coinCtx.clearRect(0, 0, coinCanvas.width, coinCanvas.height);
+
+    for (let i = activeCoins.length - 1; i >= 0; i--) {
+      const c = activeCoins[i];
+      c.life++;
+
+      if (c.life < 16) {
+        c.vy += 0.42;
+        c.x += c.vx;
+        c.y += c.vy;
+      } else {
+        const dx = c.destX - c.x;
+        const dy = c.destY - c.y;
+        c.vx += dx * 0.08;
+        c.vy += dy * 0.08;
+        c.vx *= 0.88;
+        c.vy *= 0.88;
+        c.x += c.vx;
+        c.y += c.vy;
+
+        if (Math.hypot(dx, dy) < 22 || c.life > c.maxLife) {
+          activeCoins.splice(i, 1);
+          continue;
+        }
+      }
+
+      c.rot += c.vrot;
+
+      coinCtx.save();
+      coinCtx.translate(c.x, c.y);
+      coinCtx.rotate(c.rot);
+      coinCtx.scale(Math.cos(c.rot), 1);
+
+      coinCtx.beginPath();
+      coinCtx.arc(0, 0, c.size, 0, Math.PI * 2);
+      coinCtx.fillStyle = '#facc15';
+      coinCtx.fill();
+      coinCtx.lineWidth = 1.8;
+      coinCtx.strokeStyle = '#ca8a04';
+      coinCtx.stroke();
+
+      coinCtx.beginPath();
+      coinCtx.arc(0, 0, c.size * 0.55, 0, Math.PI * 2);
+      coinCtx.fillStyle = '#eab308';
+      coinCtx.fill();
+
+      coinCtx.restore();
+    }
+
+    if (activeCoins.length > 0) {
+      coinAnimId = requestAnimationFrame(runCoinLoop);
+    } else {
+      coinAnimId = null;
+      coinCtx.clearRect(0, 0, coinCanvas.width, coinCanvas.height);
+      const pill = document.getElementById('coinsPill');
+      if (pill && hasGSAP) {
+        gsap.fromTo(pill, { scale: 1.15 }, { scale: 1, duration: 0.35, ease: 'elastic.out(1.4, 0.4)' });
+      }
+    }
   }
 
   // =========================================================================
@@ -650,6 +825,74 @@ document.addEventListener('DOMContentLoaded', () => {
     }, '-=0.5');
   }
 
+  // Dynamic Hero Headline Morphing per Card
+  const DEFAULT_HERO = {
+    top: 'THINK. PLAY. CONNECT.',
+    bottom: '<span class="hero-line hero-line-compete">COMPETE. WIN.</span> <span class="hero-line hero-line-quest"><span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.</span>',
+    sub: 'The knowledge, gaming, entertainment &amp; social platform built around a simple idea: learning should happen without feeling like studying. Turn knowledge into an experience.'
+  };
+
+  let heroMorphTimeout = null;
+  function activateHeroHeadline(roleKey) {
+    const role = ROLES[roleKey];
+    if (!role || !heroTitleTop || !heroTitleBottom) return;
+    clearTimeout(heroMorphTimeout);
+
+    if (hasGSAP) {
+      gsap.to(['#heroTitleTop', '#heroTitleBottom', '#heroSubtitle'], {
+        opacity: 0.2,
+        y: -3,
+        duration: 0.14,
+        ease: 'power2.in',
+        onComplete: () => {
+          heroTitleTop.textContent = role.heroTop;
+          heroTitleBottom.innerHTML = role.heroBottom;
+          if (heroSubtitle) heroSubtitle.textContent = role.heroSub;
+          gsap.to(['#heroTitleTop', '#heroTitleBottom', '#heroSubtitle'], {
+            opacity: 1,
+            y: 0,
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+        }
+      });
+    } else {
+      heroTitleTop.textContent = role.heroTop;
+      heroTitleBottom.innerHTML = role.heroBottom;
+      if (heroSubtitle) heroSubtitle.textContent = role.heroSub;
+    }
+  }
+
+  function resetHeroHeadline() {
+    clearTimeout(heroMorphTimeout);
+    heroMorphTimeout = setTimeout(() => {
+      if (!heroTitleTop || !heroTitleBottom) return;
+      if (hasGSAP) {
+        gsap.to(['#heroTitleTop', '#heroTitleBottom', '#heroSubtitle'], {
+          opacity: 0.2,
+          y: 3,
+          duration: 0.14,
+          ease: 'power2.in',
+          onComplete: () => {
+            heroTitleTop.textContent = DEFAULT_HERO.top;
+            heroTitleBottom.innerHTML = DEFAULT_HERO.bottom;
+            if (heroSubtitle) heroSubtitle.innerHTML = DEFAULT_HERO.sub;
+            gsap.to(['#heroTitleTop', '#heroTitleBottom', '#heroSubtitle'], {
+              opacity: 1,
+              y: 0,
+              duration: 0.25,
+              ease: 'power2.out'
+            });
+          }
+        });
+      } else {
+        heroTitleTop.textContent = DEFAULT_HERO.top;
+        heroTitleBottom.innerHTML = DEFAULT_HERO.bottom;
+        if (heroSubtitle) heroSubtitle.innerHTML = DEFAULT_HERO.sub;
+      }
+    }, 160);
+  }
+
   // Tactile Interactive Hover & 3D Tilt per Card (Smooth & Fluid)
   cards.forEach((card, i) => {
     const rest = CARD_RESTING[i];
@@ -659,6 +902,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     card.addEventListener('mouseenter', () => {
       playHoverSound();
+      activateHeroHeadline(card.dataset.role);
 
       if (hasGSAP) {
         // Elegantly glide hovered card upward with high z-index and straighten smoothly
@@ -796,6 +1040,90 @@ document.addEventListener('DOMContentLoaded', () => {
         e.stopPropagation();
         openRoleModal(card.dataset.role);
       });
+    }
+  });
+
+  const cardsFanDeck = document.getElementById('cardsFanDeck');
+  if (cardsFanDeck) {
+    cardsFanDeck.addEventListener('mouseleave', () => {
+      resetHeroHeadline();
+    });
+  }
+
+  // Interactive Deck Shuffle System (Physics & Riffle)
+  const deckShuffleBtn = document.getElementById('deckShuffleBtn');
+  let isShufflingDeck = false;
+
+  function shuffleDeck() {
+    if (isShufflingDeck || !cards.length) return;
+    isShufflingDeck = true;
+    playCardShuffleSound();
+
+    if (hasGSAP) {
+      const shuffleTl = gsap.timeline({
+        onComplete: () => {
+          isShufflingDeck = false;
+        }
+      });
+
+      // 1. Gather all cards quickly to the center stack
+      shuffleTl.to(cards, {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        scale: 0.95,
+        duration: 0.22,
+        ease: 'power2.in',
+        stagger: 0.02
+      });
+
+      // 2. Riffle wiggle
+      cards.forEach((c, idx) => {
+        const offset = (idx % 2 === 0 ? 1 : -1) * (18 + idx * 6);
+        shuffleTl.to(c, {
+          x: offset,
+          rotation: (idx - 2) * 5,
+          duration: 0.12,
+          ease: 'power1.inOut'
+        }, 0.22);
+      });
+
+      // 3. Resnap to center
+      shuffleTl.to(cards, {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        duration: 0.10,
+        ease: 'power2.in'
+      });
+
+      // 4. Redeal out to resting positions with organic spring ease
+      cards.forEach((c, idx) => {
+        const rest = CARD_RESTING[idx];
+        shuffleTl.to(c, {
+          x: 0,
+          y: rest.y,
+          rotation: rest.rot,
+          scale: rest.scale,
+          zIndex: rest.z,
+          duration: 0.62,
+          ease: 'back.out(1.5)'
+        }, 0.40 + idx * 0.04);
+      });
+    } else {
+      isShufflingDeck = false;
+    }
+  }
+
+  if (deckShuffleBtn) {
+    deckShuffleBtn.addEventListener('click', shuffleDeck);
+  }
+
+  // Spacebar triggers shuffle when not focused in input/textarea
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' && !e.target.matches('input, textarea, button, [contenteditable="true"]')) {
+      e.preventDefault();
+      shuffleDeck();
     }
   });
 
@@ -1685,6 +2013,57 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // 1v1 Matchmaking Radar Simulation System
+  const btnDuelSimulate = document.getElementById('btnDuelSimulate');
+  const duelSimOverlay = document.getElementById('duelSimOverlay');
+  const duelStatusText = document.getElementById('duelStatusText');
+  const oppPlayerName = document.getElementById('oppPlayerName');
+  const oppPlayerUni = document.getElementById('oppPlayerUni');
+  let isSimulatingDuel = false;
+
+  if (btnDuelSimulate && duelSimOverlay) {
+    btnDuelSimulate.addEventListener('click', () => {
+      if (isSimulatingDuel) return;
+      isSimulatingDuel = true;
+      playRadarSweepSound();
+
+      duelSimOverlay.classList.add('duel-sim-active');
+      duelSimOverlay.setAttribute('aria-hidden', 'false');
+      if (duelStatusText) duelStatusText.textContent = 'Scanning 14,820 live players in Lagos & UNILAG...';
+
+      // Pulse 1: Radar sweep
+      setTimeout(() => {
+        playBeep(520);
+        if (duelStatusText) duelStatusText.textContent = 'Locking onto nearby student contender...';
+      }, 850);
+
+      // Pulse 2: Opponent Lock
+      setTimeout(() => {
+        playBeep(880);
+        if (duelStatusText) duelStatusText.textContent = 'Opponent Matched! Synchronizing Duel Room...';
+        if (oppPlayerName) oppPlayerName.textContent = 'Tunde O.';
+        if (oppPlayerUni) oppPlayerUni.textContent = 'UNILAG • Level 42';
+
+        const matchCard = document.getElementById('duelMatchCard');
+        if (matchCard && hasGSAP) {
+          gsap.fromTo(matchCard, { scale: 0.88, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: 'back.out(1.6)' });
+        }
+      }, 1750);
+
+      // Pulse 3: Seamless Transition to Duel Challenge
+      setTimeout(() => {
+        duelSimOverlay.classList.remove('duel-sim-active');
+        duelSimOverlay.setAttribute('aria-hidden', 'true');
+        isSimulatingDuel = false;
+        playCardSelectSound();
+
+        // Switch to duels engine and trigger notification
+        switchLibraryEngine('duels');
+        triggerToast('1v1 Match Connected vs Tunde O. (UNILAG)! 4 seconds on clock!');
+      }, 2850);
+    });
+  }
+
   // =========================================================================
   // Section 6: Interactive Pricing Toggle (Individual vs Company) & Plan Actions
   // =========================================================================
@@ -1742,17 +2121,77 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Phone Riddle Mini-Game & Streak Completion System
+  const phoneOptBtns = document.querySelectorAll('.phone-opt-btn');
+  const phoneClaimBtnText = document.getElementById('phoneClaimBtnText');
   const finalSignUpBtn = document.getElementById('finalSignUpBtn');
   const phoneProgressFill = document.getElementById('phoneProgressFill');
   const phoneStreakDays = document.getElementById('phoneStreakDays');
+
+  phoneOptBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isCorrect = btn.dataset.riddle === 'correct';
+
+      if (isCorrect) {
+        btn.classList.add('opt-correct');
+        playCoinChime();
+        playBeep(880);
+
+        if (phoneProgressFill) {
+          phoneProgressFill.style.width = '100%';
+        }
+        if (phoneStreakDays) {
+          phoneStreakDays.textContent = 'Day 43 / 365 🔥 Completed!';
+        }
+
+        if (finalSignUpBtn) {
+          finalSignUpBtn.classList.add('ready-to-claim');
+        }
+        if (phoneClaimBtnText) {
+          phoneClaimBtnText.textContent = 'Claim ₦1,500 Airtime Drop (+50,000 Coins)';
+        }
+
+        phoneOptBtns.forEach(other => {
+          if (other !== btn) other.disabled = true;
+        });
+
+        triggerToast('Correct! Lagos is the Centre of Excellence. +₦1,500 Airtime Drop Ready!');
+        const rect = btn.getBoundingClientRect();
+        spawnCoinBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 20);
+      } else {
+        btn.classList.add('opt-wrong');
+        playBeep(240);
+        triggerToast('Incorrect! 1 Clue Life lost. Clue: Lagos is known as the Centre of Excellence.');
+        if (hasGSAP) {
+          gsap.fromTo(btn, { x: -6 }, {
+            x: 6,
+            duration: 0.08,
+            repeat: 3,
+            yoyo: true,
+            ease: 'power1.inOut',
+            onComplete: () => {
+              btn.style.transform = '';
+            }
+          });
+        }
+      }
+    });
+  });
+
   if (finalSignUpBtn) {
     finalSignUpBtn.addEventListener('click', () => {
-      playCoinChime();
+      const rect = finalSignUpBtn.getBoundingClientRect();
+      spawnCoinBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 35);
+
       currentCoins += 50000;
       if (coinsAmount) coinsAmount.textContent = formatNumber(currentCoins);
       if (phoneProgressFill) phoneProgressFill.style.width = '100%';
       if (phoneStreakDays) phoneStreakDays.textContent = 'Day 43 / 365';
-      triggerToast('Daily 20/20 Target Complete! +₦1,500 Airtime Drop & 50,000 Clue Coins Credited.');
+      if (phoneClaimBtnText) phoneClaimBtnText.textContent = 'Claimed ✓ ₦1,500 Airtime Sent';
+      finalSignUpBtn.classList.remove('ready-to-claim');
+
+      triggerToast('₦1,500 Airtime Drop & 50,000 Clue Coins Credited to your account!');
       if (hasGSAP) {
         gsap.fromTo(finalSignUpBtn, { scale: 0.94 }, { scale: 1, duration: 0.4, ease: 'elastic.out(1.4, 0.4)' });
       }
@@ -1885,22 +2324,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 3. Expanding Game Library Section (#prizesSection)
-    const engineTabs = document.querySelectorAll('#prizesSection .engine-nav-tab');
-    if (engineTabs.length) {
-      gsap.from(engineTabs, {
-        scrollTrigger: {
-          trigger: '#prizesSection .library-engines-nav',
-          start: 'top 85%',
-          toggleActions: 'play none none none'
-        },
-        y: 24,
-        opacity: 0,
-        duration: 0.65,
-        stagger: 0.08,
-        ease: 'power2.out'
-      });
-    }
-
     const showcaseStage = document.querySelector('#libraryShowcaseStage');
     if (showcaseStage) {
       gsap.from(showcaseStage, {

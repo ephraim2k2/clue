@@ -707,16 +707,23 @@ body::-webkit-scrollbar,
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 8px;
+  padding-bottom: 12px;
   flex: 1;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
   box-sizing: border-box;
+  gap: 12px;
 }
 
 .hero-titles-group {
   padding-top: 14px;
   margin-bottom: 12px;
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .hero-title {
@@ -728,6 +735,11 @@ body::-webkit-scrollbar,
   text-transform: uppercase;
   color: #ffffff;
   text-shadow: none;
+  columns: 1 !important;
+  column-count: 1 !important;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .hero-title-top {
@@ -737,12 +749,20 @@ body::-webkit-scrollbar,
 .hero-title-bottom {
   display: block;
   text-align: center;
+  columns: 1 !important;
+  column-count: 1 !important;
+  width: 100%;
+}
+
+.hero-line {
+  display: inline;
 }
 
 .hero-word-knowledge {
   display: inline-flex;
   align-items: center;
-  white-space: nowrap;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
   vertical-align: baseline;
 }
 
@@ -778,7 +798,7 @@ body::-webkit-scrollbar,
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.85);
   max-width: 620px;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
   letter-spacing: 0.1px;
 }
 
@@ -792,9 +812,10 @@ body::-webkit-scrollbar,
   max-width: 1180px;
   position: relative;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: flex-end;
-  margin-top: auto;
+  margin: 36px auto 0 auto;
   perspective: 1200px;
 }
 
@@ -803,6 +824,7 @@ body::-webkit-scrollbar,
   width: 100%;
   max-width: 1140px;
   height: 425px;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -940,10 +962,11 @@ body::-webkit-scrollbar,
 }
 
 .full-card-art {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
   border-radius: 32px;
   transition: transform 0.4s ease-out;
 }
@@ -1644,7 +1667,18 @@ body:not(.gsap-active) .fan-card:hover .full-card-art {
     font-size: 12px;
   }
   .hero-title {
-    font-size: clamp(26px, 7.2vw, 34px);
+    font-size: clamp(20px, 5.8vw, 28px);
+    line-height: 1.22;
+    text-align: center;
+  }
+  .hero-line {
+    display: block;
+  }
+  .hero-line-compete {
+    margin-bottom: 2px;
+  }
+  .hero-line-quest {
+    white-space: nowrap;
   }
   .promo-pill {
     display: none;
@@ -1665,6 +1699,9 @@ body:not(.gsap-active) .fan-card:hover .full-card-art {
 @media (min-width: 901px) and (max-height: 860px) {
   .landing-fold {
     padding-top: 12px;
+  }
+  .cards-showcase-container {
+    margin-top: 18px;
   }
   .hero-titles-group {
     padding-top: 6px;
@@ -2178,59 +2215,69 @@ body:not(.gsap-active) .fan-card:hover .full-card-art {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 28px;
+  gap: 14px;
+  margin-bottom: 32px;
   flex-wrap: wrap;
   width: 100%;
   max-width: 1260px;
+  position: relative;
+  z-index: 10;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .engine-nav-tab {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 20px;
+  padding: 12px 22px;
   border-radius: 9999px;
-  background: #4338ca;
-  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  background: rgba(15, 23, 42, 0.45);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-bottom: 3.5px solid #000000;
   color: #ffffff;
   font-family: var(--font-ui);
   font-size: 13.5px;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s ease;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .engine-nav-tab:hover {
-  background: #3730a3;
+  background: rgba(15, 23, 42, 0.75);
   border-color: #ffffff;
   transform: translateY(-2px);
+  color: #ffffff;
 }
 
 .engine-nav-tab.active {
-  background: #ffffff;
-  color: #0f172a;
-  border-color: #ffffff;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #ffffff !important;
+  border-bottom: 3.5px solid #94a3b8 !important;
+  transform: translateY(0);
 }
 
 .engine-nav-tab.active .ui-icon {
-  fill: #4f46e5;
+  fill: #4f46e5 !important;
 }
 
 .tab-badge {
   font-size: 10px;
   font-weight: 800;
-  padding: 2px 8px;
+  padding: 2.5px 9px;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.2);
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .engine-nav-tab.active .tab-badge {
-  background: #eef2ff;
-  color: #4f46e5;
+  background: #e0e7ff !important;
+  color: #4338ca !important;
 }
 
 /* Main Showcase Stage */
@@ -4837,6 +4884,528 @@ body:not(.gsap-active) .fan-card:hover .full-card-art {
 }
 
 /* ==========================================================================
+   FEATURE ELEVATIONS: Haptics, Ticker, Deck Glints, Radar Duels & Accents
+   ========================================================================== */
+
+/* 1. Card Holographic Bevel Glint Sweep */
+.card-glint-sweep {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.22) 45%,
+    rgba(255, 255, 255, 0.65) 50%,
+    rgba(255, 255, 255, 0.22) 55%,
+    transparent 80%
+  );
+  transform: translateX(-160%) skewX(-15deg);
+  pointer-events: none;
+  z-index: 5;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fan-card:hover .card-glint-sweep {
+  transform: translateX(160%) skewX(-15deg);
+}
+
+/* Deck Controls & Shuffle Hand Button */
+.deck-controls-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 18px;
+  position: relative;
+  z-index: 35;
+}
+
+.deck-shuffle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #0f172a;
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 3.5px solid #000000;
+  border-radius: 9999px;
+  padding: 8px 20px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.deck-shuffle-btn .kbd-hint {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 2px 7px;
+  border-radius: 6px;
+  color: #facc15;
+}
+
+.deck-shuffle-btn:hover {
+  background: #1e293b;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  border-bottom-width: 4px;
+}
+
+.deck-shuffle-btn:active {
+  transform: translateY(2px);
+  border-bottom-width: 1px;
+}
+
+/* 2. Physical Arcade Push-Down Button Keypress Physics */
+.pillar-btn,
+.nav-signup-btn,
+.exam-action-btn,
+.pricing-action-btn,
+.phone-claim-btn,
+.engine-play-btn,
+.store-download-btn,
+.engine-duel-btn,
+.gh-subscribe-btn {
+  position: relative;
+  border-bottom: 3.5px solid #000000 !important;
+  transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1),
+              border-bottom-width 0.1s ease,
+              background 0.2s ease !important;
+}
+
+.pillar-btn:hover,
+.nav-signup-btn:hover,
+.exam-action-btn:hover,
+.pricing-action-btn:hover,
+.phone-claim-btn:hover,
+.engine-play-btn:hover,
+.store-download-btn:hover,
+.engine-duel-btn:hover {
+  transform: translateY(-2px);
+  border-bottom-width: 4px !important;
+}
+
+.pillar-btn:active,
+.nav-signup-btn:active,
+.exam-action-btn:active,
+.pricing-action-btn:active,
+.phone-claim-btn:active,
+.engine-play-btn:active,
+.store-download-btn:active,
+.engine-duel-btn:active {
+  transform: translateY(2px) !important;
+  border-bottom-width: 1px !important;
+}
+
+/* 3. Live Activity Ticker (Continuous Community Pulse) */
+.live-activity-ticker {
+  width: 100%;
+  max-width: 1340px;
+  margin: 18px auto 0;
+  background: #0f172a;
+  border: 1.5px solid #334155;
+  border-radius: 9999px;
+  padding: 6px 14px 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  overflow: hidden;
+  position: relative;
+  z-index: 25;
+}
+
+.ticker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #1e293b;
+  border: 1px solid #475569;
+  border-radius: 9999px;
+  padding: 5px 12px;
+  font-family: var(--font-hero);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.ticker-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: tickerDotPulse 1.6s infinite;
+}
+
+@keyframes tickerDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.8); }
+}
+
+.ticker-track {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  flex: 1;
+  mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+}
+
+.ticker-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  white-space: nowrap;
+  animation: tickerMarquee 38s linear infinite;
+}
+
+.ticker-track:hover .ticker-content {
+  animation-play-state: paused;
+}
+
+@keyframes tickerMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  font-size: 12.5px;
+  color: #e2e8f0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ticker-dot {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.highlight-green { color: #4ade80; }
+.highlight-yellow { color: #facc15; }
+.highlight-cyan { color: #38bdf8; }
+.highlight-purple { color: #c084fc; }
+
+/* 4. 1v1 Matchmaking Radar & Duel Simulator in Game Library */
+.engine-duel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0f172a;
+  color: #facc15;
+  border: 1.5px solid #facc15;
+  padding: 13px 22px;
+  border-radius: 9999px;
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.engine-interactive-preview {
+  position: relative;
+  overflow: hidden;
+}
+
+.duel-sim-overlay {
+  position: absolute;
+  inset: 0;
+  background: #0f172a;
+  border-radius: 26px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  color: #ffffff;
+}
+
+.duel-sim-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.duel-radar-hud {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2px solid #38bdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.radar-ping-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid #38bdf8;
+  animation: radarPing 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.radar-ping-ring.ping-2 {
+  animation-delay: 1s;
+}
+
+@keyframes radarPing {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.radar-sweep-beam {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0deg, rgba(56, 189, 248, 0.45) 60deg, transparent 90deg);
+  animation: radarRotate 2s linear infinite;
+}
+
+@keyframes radarRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.radar-center-hub {
+  position: relative;
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #38bdf8;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radar-center-hub svg {
+  width: 22px;
+  height: 22px;
+}
+
+.duel-status-text {
+  font-family: var(--font-hero);
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.duel-match-card {
+  display: none;
+  align-items: center;
+  gap: 16px;
+  background: #1e293b;
+  border: 1.5px solid #334155;
+  border-radius: 20px;
+  padding: 14px 20px;
+  margin-top: 8px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.duel-match-card.matched {
+  display: flex;
+  animation: matchCardPop 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes matchCardPop {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.duel-player-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  flex: 1;
+}
+
+.duel-player-role {
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #94a3b8;
+  letter-spacing: 0.6px;
+}
+
+.duel-badge-pill {
+  font-size: 10px;
+  font-weight: 800;
+  background: #0f172a;
+  border: 1px solid #475569;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  color: #facc15;
+}
+
+.duel-vs-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e11d48;
+  color: #ffffff;
+  font-family: var(--font-hero);
+  font-size: 11.5px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  flex-shrink: 0;
+}
+
+/* 5. Interactive Phone Riddle & Streak Challenge */
+.phone-riddle-box {
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 13px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.riddle-tag-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.riddle-pill {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  color: #4338ca;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+.riddle-time {
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 800;
+  color: #e11d48;
+}
+
+.phone-riddle-q {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.phone-riddle-opts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.phone-opt-btn {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #0f172a;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.phone-opt-btn:hover {
+  background: #eef2ff;
+  border-color: #6366f1;
+}
+
+.phone-opt-btn.correct,
+.phone-opt-btn.opt-correct {
+  background: #f0fdf4 !important;
+  border-color: #22c55e !important;
+  color: #15803d !important;
+  font-weight: 800;
+}
+
+.phone-opt-btn.wrong,
+.phone-opt-btn.opt-wrong {
+  background: #fef2f2 !important;
+  border-color: #ef4444 !important;
+  color: #b91c1c !important;
+}
+
+.phone-claim-btn.ready-to-claim {
+  background: #16a34a !important;
+  border-color: #15803d !important;
+  animation: pulseClaimBtn 1.2s infinite alternate;
+}
+
+@keyframes pulseClaimBtn {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.03); }
+}
+
+/* 6. Coin Particle Canvas Overlay */
+.coin-fx-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* 7. Tournament Ticket Perforated Accents */
+.ticket-notch-divider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 0;
+  opacity: 0.45;
+}
+
+.ticket-notch-line {
+  flex: 1;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, #94a3b8 0, #94a3b8 8px, transparent 8px, transparent 14px);
+}
+
+.ticket-notch-pill {
+  font-family: var(--font-hero);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #64748b;
+  padding: 3px 12px;
+  border: 1px dashed #94a3b8;
+  border-radius: 9999px;
+}
+
+/* ==========================================================================
    COMPREHENSIVE MOBILE & TABLET RESPONSIVENESS (INDEX.HTML + PRIVACY.HTML)
    ========================================================================== */
 
@@ -4941,9 +5510,19 @@ body:not(.gsap-active) .fan-card:hover .full-card-art {
     margin-bottom: 10px;
   }
   .hero-title {
-    font-size: clamp(23px, 6.3vw, 34px);
-    line-height: 1.18;
+    font-size: clamp(20px, 5.8vw, 28px);
+    line-height: 1.22;
     letter-spacing: -0.01em;
+    text-align: center;
+  }
+  .hero-line {
+    display: block;
+  }
+  .hero-line-compete {
+    margin-bottom: 2px;
+  }
+  .hero-line-quest {
+    white-space: nowrap;
   }
   .hero-title-top {
     margin-bottom: 4px;
