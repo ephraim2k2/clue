@@ -1,0 +1,20 @@
+{
+  "name": "clue",
+  "version": "1.0.0",
+  "description": "CLUE • Interactive Educational Gaming, Live Trivia & Pre-Employment Screening Platform",
+  "scripts": {
+    "dev": "python3 -m http.server 3000 || npx serve -p 3000",
+    "start": "python3 -m http.server 3000 || npx serve -p 3000",
+    "serve": "npx serve -p 3000"
+  },
+  "keywords": [
+    "clue",
+    "educational-game",
+    "trivia",
+    "speed-math",
+    "cyber-awareness"
+  ],
+  "author": "CLUE Platform",
+  "license": "ISC"
+}
+

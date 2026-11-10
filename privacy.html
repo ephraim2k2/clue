@@ -107,7 +107,27 @@
   }
   </script>
 </head>
-<body class="privacy-body">
+<body class="privacy-body is-loading">
+  <!-- =====================================================================
+       Gaming Arena Preloader (Option 1)
+       ===================================================================== -->
+  <!-- Minimal Elegant Preloader -->
+  <div id="cluePreloader" class="clue-preloader" aria-label="Loading Clue Platform" role="status">
+    <div class="preloader-content">
+      <div class="preloader-brand-stage">
+        <div class="preloader-spinner"></div>
+        <div class="preloader-logo-disc">
+          <img src="assets/clue-logo-nav.png" alt="CLUE" class="preloader-logo-img">
+        </div>
+      </div>
+      <div class="preloader-progress-box">
+        <div class="preloader-track">
+          <div class="preloader-fill" id="preloaderFill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Top Luxury Scroll Progress Indicator -->
   <div id="scrollProgressBar" class="scroll-progress-bar" aria-hidden="true"></div>
 
@@ -118,17 +138,11 @@
 
     <!-- Ambient Floating 3D Background Elements -->
     <div class="floating-scene">
-      <div class="floating-item float-witch" id="witchFloat">
-        <img src="assets/witch-float.png" alt="Witch">
-        <div class="witch-aura"></div>
+      <div class="floating-item float-witch float-trophy" id="witchFloat" title="CLUE Tournament Champions Cup">
+        <img src="assets/float-trophy.png" alt="CLUE Tournament Trophy" class="float-element-img" width="95" height="95" decoding="async">
       </div>
-      <div class="floating-item float-cauldron" id="cauldronFloat">
-        <img src="assets/cauldron-float.png" alt="Magic Cauldron">
-        <div class="cauldron-steam">
-          <span class="bubble b1"></span>
-          <span class="bubble b2"></span>
-          <span class="bubble b3"></span>
-        </div>
+      <div class="floating-item float-cauldron float-gamepad" id="cauldronFloat" title="CLUE Smart Gaming Controller">
+        <img src="assets/float-gamepad.png" alt="CLUE Gaming Controller" class="float-element-img" width="95" height="95" decoding="async">
       </div>
     </div>
   </div>
@@ -149,7 +163,7 @@
           <div class="nav-divider" aria-hidden="true"></div>
 
           <!-- Navigation Tabs Beside Logo -->
-          <a href="index.html" class="nav-btn" aria-label="Back to Games" style="text-decoration: none;">
+          <a href="index.html" class="nav-btn nav-btn-active" id="btnGames" aria-label="Games" style="text-decoration: none;">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
               <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S20.17 9 21 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
             </svg>
@@ -166,6 +180,7 @@
 
         <!-- Right: Coins Counter & Sign Up CTA (Identical to index.html) -->
         <div class="nav-right">
+          <!-- Coins Counter (Commented out)
           <div class="coins-pill" id="coinsPill">
             <div class="coin-icon-wrapper">
               <svg class="coin-svg" viewBox="0 0 32 32">
@@ -183,6 +198,7 @@
             </div>
             <span class="coins-amount" id="coinsAmount">28.105.820</span>
           </div>
+          -->
 
           <a href="index.html" class="nav-signup-btn" style="text-decoration: none;">Sign Up</a>
         </div>
@@ -191,9 +207,9 @@
       <!-- Hero Titles & Subtitle (Same Hero Typography System as index.html) -->
       <div class="privacy-hero-content">
         <div class="hero-titles-group">
-          <h1 class="hero-title hero-title-top">CLUE PRIVACY POLICY.</h1>
+          <h1 class="hero-title hero-title-top">How we protect your privacy.</h1>
           <h2 class="hero-title hero-title-bottom">
-            DIRECT. TRANSPARENT. SECURE.
+            Direct, transparent, and secure.
           </h2>
         </div>
 
@@ -220,19 +236,40 @@
           </div>
         </div>
 
-        <!-- 3-Pillar Executive Summary Cards (3 Lines Each) -->
+        <!-- 3-Pillar Executive Summary Cards (Solid cards matching index.html) -->
         <div class="privacy-highlights-grid">
-          <div class="privacy-highlight-card">
+          <div class="privacy-highlight-card ph-card-navy">
+            <div class="solid-card-top">
+              <div class="solid-card-icon ph-icon-navy" title="Zero Data Selling">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                </svg>
+              </div>
+            </div>
             <h3>Zero Data Selling</h3>
             <p>We never sell your identity, phone number, or test scores to third-party brokers or advertisers.</p>
           </div>
 
-          <div class="privacy-highlight-card">
+          <div class="privacy-highlight-card ph-card-violet">
+            <div class="solid-card-top">
+              <div class="solid-card-icon ph-icon-violet" title="Private Study Records">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
+                </svg>
+              </div>
+            </div>
             <h3>Private Study Records</h3>
             <p>Primary, secondary, and university test scores stay private to you and your authorized school or tutor.</p>
           </div>
 
-          <div class="privacy-highlight-card">
+          <div class="privacy-highlight-card ph-card-emerald">
+            <div class="solid-card-top">
+              <div class="solid-card-icon ph-icon-emerald" title="Encrypted Prize Drops">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                </svg>
+              </div>
+            </div>
             <h3>Encrypted Prize Drops</h3>
             <p>Phone numbers for MTN, Airtel, Glo, and 9mobile airtime/data payouts are encrypted and used only for prize delivery.</p>
           </div>
@@ -307,18 +344,30 @@
             </p>
             <div class="privacy-subgrid">
               <div class="privacy-subcard">
+                <div class="subcard-icon" title="Account Basics">
+                  <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                </div>
                 <h4>Account Basics</h4>
                 <p>Your username, email address, age tier, and encrypted password when you register a Clue account.</p>
               </div>
               <div class="privacy-subcard">
+                <div class="subcard-icon" title="Gameplay & Streaks">
+                  <svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S20.17 9 21 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                </div>
                 <h4>Gameplay &amp; Streaks</h4>
                 <p>Your 3-Life match scores, XP, 365-day streak progress, and Course &rarr; Topic &rarr; Test revision accuracy.</p>
               </div>
               <div class="privacy-subcard">
+                <div class="subcard-icon" title="Reward Payout Info">
+                  <svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
+                </div>
                 <h4>Reward Payout Info</h4>
                 <p>Your mobile number and network (MTN, Airtel, Glo, 9mobile) when you claim airtime, data, or cash prizes.</p>
               </div>
               <div class="privacy-subcard">
+                <div class="subcard-icon" title="Device Diagnostics">
+                  <svg viewBox="0 0 24 24"><path d="M4 6h16v10H4V6zm16-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/></svg>
+                </div>
                 <h4>Device Diagnostics</h4>
                 <p>Basic device type and connection latency to keep 5-second audio clips and live 1v1 duels lag-free.</p>
               </div>
@@ -359,18 +408,30 @@
             </p>
             <div class="privacy-subgrid">
               <div class="privacy-subcard">
+                <div class="subcard-icon" title="Student & Minor Safety">
+                  <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                </div>
                 <h4>Student &amp; Minor Safety</h4>
                 <p>Academic scores are private by default. Junior profiles have restricted direct messaging and require parent or school approval.</p>
               </div>
               <div class="privacy-subcard">
+                <div class="subcard-icon" title="Clue Party Guest Mode">
+                  <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                </div>
                 <h4>Clue Party Guest Mode</h4>
                 <p>Joining a live party via Room PIN only requires a temporary nickname—no permanent account needed.</p>
               </div>
               <div class="privacy-subcard">
+                <div class="subcard-icon" title="Clue Chat & Groups">
+                  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                </div>
                 <h4>Clue Chat &amp; Groups</h4>
                 <p>Group chats and 1v1 banter are protected by automated filters and two-tap player blocking/reporting.</p>
               </div>
               <div class="privacy-subcard">
+                <div class="subcard-icon" title="Sponsored Challenges">
+                  <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
+                </div>
                 <h4>Sponsored Challenges</h4>
                 <p>Brand sponsors only see total participant counts—never your phone number or personal identity.</p>
               </div>
@@ -407,22 +468,42 @@
             </p>
             <div class="privacy-rights-grid">
               <div class="right-item">
-                <span class="right-tag">RIGHT 01</span>
+                <div class="right-item-top">
+                  <span class="right-tag">RIGHT 01</span>
+                  <div class="right-item-icon" title="Access & Export">
+                    <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                  </div>
+                </div>
                 <h4>Access &amp; Export</h4>
                 <p>Download a copy of your profile, test scorecards, streak history, and reward logs anytime.</p>
               </div>
               <div class="right-item">
-                <span class="right-tag">RIGHT 02</span>
+                <div class="right-item-top">
+                  <span class="right-tag">RIGHT 02</span>
+                  <div class="right-item-icon" title="Update Details">
+                    <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                  </div>
+                </div>
                 <h4>Update Details</h4>
                 <p>Edit your username, school affiliation, phone number, or email directly in Profile Settings.</p>
               </div>
               <div class="right-item">
-                <span class="right-tag">RIGHT 03</span>
+                <div class="right-item-top">
+                  <span class="right-tag">RIGHT 03</span>
+                  <div class="right-item-icon" title="One-Tap Deletion">
+                    <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                  </div>
+                </div>
                 <h4>One-Tap Deletion</h4>
                 <p>Delete your account anytime via <em>Settings &rarr; Privacy &rarr; Delete Account</em> or by emailing our DPO.</p>
               </div>
               <div class="right-item">
-                <span class="right-tag">RIGHT 04</span>
+                <div class="right-item-top">
+                  <span class="right-tag">RIGHT 04</span>
+                  <div class="right-item-icon" title="Opt Out Anytime">
+                    <svg viewBox="0 0 24 24"><path d="M17 7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h10c2.76 0 5-2.24 5-5s-2.24-5-5-5zm0 8c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
+                  </div>
+                </div>
                 <h4>Opt Out Anytime</h4>
                 <p>Toggle off promotional notifications, challenge alerts, or leaderboard visibility with one switch.</p>
               </div>
@@ -592,76 +673,74 @@
           <span class="gh-brand-wordmark">CLUE</span>
         </a>
 
-        <div class="gh-newsletter-group">
+        <form class="gh-newsletter-form" id="footerNewsletterForm" onsubmit="event.preventDefault();">
           <div class="gh-newsletter-tag">
             <span class="gh-purple-bar"></span>
-            <span class="gh-newsletter-title">THE CLUE INTEL DISPATCH</span>
+            <span class="gh-newsletter-title">Subscribe to our Newsletter</span>
           </div>
-          <button class="gh-subscribe-btn" id="footerSubscribeBtn">
-            Subscribe
-          </button>
-        </div>
+          <div class="gh-newsletter-input-wrap">
+            <input type="email" class="gh-newsletter-input" id="footerEmailInput" placeholder="Enter your email address" required aria-label="Email address for newsletter">
+            <button class="gh-subscribe-btn" id="footerSubscribeBtn" type="submit">
+              Subscribe
+            </button>
+          </div>
+        </form>
       </div>
 
       <div class="gh-divider"></div>
 
       <!-- Main Middle Area: Split 4 Columns + Right 3D Mascot Stage -->
       <div class="gh-footer-main">
-        <div class="gh-links-grid">
-          <!-- Col 1: THE CLUE EXPERIENCE -->
+         <div class="gh-links-grid">
+          <!-- Col 1: PRODUCT & MODES -->
           <div class="gh-col">
-            <h4 class="gh-col-title">THE EXPERIENCE</h4>
+            <h4 class="gh-col-title">PRODUCT &amp; MODES</h4>
             <ul class="gh-col-links">
-              <li><a href="index.html#pillarsSection" class="gh-link">Play Game Library</a></li>
-              <li><a href="index.html#pillarsSection" class="gh-link">Structured Educational Tests</a></li>
-              <li><a href="index.html#pillarsSection" class="gh-link">Brain Teasers &amp; Riddles</a></li>
-              <li><a href="index.html#pillarsSection" class="gh-link">Three-Life &amp; Clue System</a></li>
-              <li><a href="index.html#pillarsSection" class="gh-link">Daily, Weekly &amp; Monthly Targets</a></li>
-              <li><a href="index.html#pillarsSection" class="gh-link">365-Day Streaks Engine</a></li>
-              <li><a href="index.html#pillarsSection" class="gh-link">Clue AI System</a></li>
+              <li><a href="#pillarsSection" class="gh-link">Educational Tests</a></li>
+              <li><a href="#pillarsSection" class="gh-link">Brain Teasers &amp; Riddles</a></li>
+              <li><a href="#pillarsSection" class="gh-link">3-Life &amp; Clue Mechanic</a></li>
+              <li><a href="#pillarsSection" class="gh-link">Daily Streaks &amp; Targets</a></li>
+              <li><a href="#prizesSection" class="gh-link">1v1 Tournament Arena</a></li>
+              <li><a href="#howItWorksSection" class="gh-link">How Clue Works</a></li>
             </ul>
           </div>
 
-          <!-- Col 2: GAME LIBRARY -->
+          <!-- Col 2: EVENTS & GATHERINGS -->
           <div class="gh-col">
-            <h4 class="gh-col-title">GAME LIBRARY</h4>
+            <h4 class="gh-col-title">GATHERINGS &amp; LIVE</h4>
             <ul class="gh-col-links">
-              <li><a href="index.html#prizesSection" class="gh-link">Who Sang This? (Music)</a></li>
-              <li><a href="index.html#prizesSection" class="gh-link">Finish the Lyrics</a></li>
-              <li><a href="index.html#prizesSection" class="gh-link">What Movie Is This? (Cinema)</a></li>
-              <li><a href="index.html#prizesSection" class="gh-link">Guess the Actor &amp; Character</a></li>
-              <li><a href="index.html#prizesSection" class="gh-link">Memory, Logic &amp; Patterns</a></li>
-              <li><a href="index.html#prizesSection" class="gh-link">Nigerian &amp; African Culture</a></li>
-              <li><a href="index.html#prizesSection" class="gh-link">Arabic &amp; Multilingual Clue</a></li>
+              <li><a href="#interviewsSection" class="gh-link">Host a Live Clue Party</a></li>
+              <li><a href="#interviewsSection" class="gh-link">Churches &amp; Youth Leagues</a></li>
+              <li><a href="#interviewsSection" class="gh-link">Bible Quiz Challenges</a></li>
+              <li><a href="#interviewsSection" class="gh-link">Schools &amp; Campus Cups</a></li>
+              <li><a href="#interviewsSection" class="gh-link">Clue Live Championships</a></li>
+              <li><a href="#recruitmentSection" class="gh-link">Hiring Tests (Anti-Cheat)</a></li>
             </ul>
           </div>
 
-          <!-- Col 3: PARTIES & COMMUNITIES -->
+          <!-- Col 3: REWARDS & PRICING -->
           <div class="gh-col">
-            <h4 class="gh-col-title">PARTIES &amp; LIVE</h4>
+            <h4 class="gh-col-title">PLANS</h4>
             <ul class="gh-col-links">
-              <li><a href="index.html#interviewsSection" class="gh-link">Host a Clue Party (30+ Players)</a></li>
-              <li><a href="index.html#interviewsSection" class="gh-link">Clue for Churches &amp; Fellowships</a></li>
-              <li><a href="index.html#interviewsSection" class="gh-link">Bible Challenges &amp; Sunday School</a></li>
-              <li><a href="index.html#interviewsSection" class="gh-link">Schools &amp; Universities</a></li>
-              <li><a href="index.html#interviewsSection" class="gh-link">Clue Live Stream &amp; Shows</a></li>
-              <li><a href="index.html#interviewsSection" class="gh-link">National Clue Championship</a></li>
-              <li><a href="index.html#proofSection" class="gh-link">Clue Groups &amp; 1v1 Duels</a></li>
+              <li><a href="#pricingSection" class="gh-link">Free Cluer Plan</a></li>
+              <li><a href="#pricingSection" class="gh-link">Clue Plus Membership</a></li>
+              <li><a href="#pricingSection" class="gh-link">Party Host Pass</a></li>
+              <li><a href="#pricingSection" class="gh-link">Campus &amp; Business Licenses</a></li>
+              <!-- <li><a href="#howItWorksSection" class="gh-link">Airtime &amp; Cash Rewards</a></li>
+              <li><a href="#howItWorksSection" class="gh-link">Sponsored Brand Arenas</a></li> -->
             </ul>
           </div>
 
-          <!-- Col 4: REWARDS & BRANDS -->
+          <!-- Col 4: TRUST & COMPANY -->
           <div class="gh-col">
-            <h4 class="gh-col-title">REWARDS &amp; BRANDS</h4>
+            <h4 class="gh-col-title">COMPANY &amp; LEGAL</h4>
             <ul class="gh-col-links">
-              <li><a href="index.html#howItWorksSection" class="gh-link">Airtime &amp; Mobile Data Drops</a></li>
-              <li><a href="index.html#howItWorksSection" class="gh-link">Cash Payouts &amp; Food Vouchers</a></li>
-              <li><a href="index.html#howItWorksSection" class="gh-link">Sponsored Brand Challenges</a></li>
-              <li><a href="index.html#howItWorksSection" class="gh-link">MTN Music Challenge</a></li>
-              <li><a href="index.html#howItWorksSection" class="gh-link">Restaurant &amp; Business Foot Traffic</a></li>
-              <li><a href="index.html#howItWorksSection" class="gh-link">Partner &amp; Sponsor Inquiries</a></li>
-              <li><a href="index.html#howItWorksSection" class="gh-link">Community Ambassador Program</a></li>
-              <li><a href="privacy.html" class="gh-link">Privacy Policy &amp; Data Protection</a></li>
+              <li><a href="privacy.html" class="gh-link">Privacy Policy</a></li>
+              <li><a href="#" class="gh-link">Terms of Service</a></li>
+              <li><a href="#" class="gh-link">Anti-Cheat Architecture</a></li>
+              <li><a href="#" class="gh-link">Community Guidelines</a></li>
+              <!-- <li><a href="#" class="gh-link">Brand &amp; Sponsor Partnerships</a></li> -->
+              <!-- <li><a href="mailto:support@playclue.com" class="gh-link">Support &amp; Contact</a></li> -->
             </ul>
           </div>
         </div>
@@ -669,7 +748,7 @@
         <!-- Vertical Divider & Right 3D Character Mascot Stage -->
         <div class="gh-mascot-stage">
           <div class="gh-mascot-wrapper">
-            <img src="assets/footer-mascot.png" alt="CLUE 3D Mascot" class="gh-mascot-img">
+            <img src="assets/footer-mascot.png" alt="CLUE 3D Mascot" class="gh-mascot-img" id="footerMascotImg" title="Say hello to Clue owl! 👋" loading="lazy" decoding="async" width="280" height="280">
           </div>
         </div>
       </div>
@@ -1033,8 +1112,9 @@
       });
 
       // 3. GSAP Hero Entrance, Floating Loop & Scroll Choreography (Guaranteed Visibility)
+      let heroTl = null;
       if (hasGSAP) {
-        const heroTl = gsap.timeline({ defaults: { ease: 'power3.out', clearProps: 'transform,opacity' } });
+        heroTl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out', clearProps: 'transform,opacity' } });
 
         heroTl.fromTo('.navbar',
           { y: -32, opacity: 0 },
@@ -1088,6 +1168,85 @@
         animateOnScroll('#privacyFaqSection .arenas-header', { y: 28, opacity: 0 }, { y: 0, opacity: 1 });
         animateOnScroll('.privacy-faq-item', { y: 20, opacity: 0 }, { y: 0, opacity: 1 });
         animateOnScroll('.gh-footer .gh-col, .gh-footer .gh-mascot-stage', { y: 24, opacity: 0 }, { y: 0, opacity: 1 });
+      }
+
+      // Newsletter Form Subscription Handler
+      const footerNewsletterForm = document.getElementById('footerNewsletterForm');
+      const footerEmailInput = document.getElementById('footerEmailInput');
+      const footerSubscribeBtn = document.getElementById('footerSubscribeBtn');
+      if (footerNewsletterForm) {
+        footerNewsletterForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const email = footerEmailInput ? footerEmailInput.value.trim() : '';
+          if (!email) return;
+          if (footerSubscribeBtn) {
+            const originalText = footerSubscribeBtn.textContent;
+            footerSubscribeBtn.textContent = 'Subscribed!';
+            footerSubscribeBtn.style.background = '#22c55e';
+            setTimeout(() => {
+              footerSubscribeBtn.textContent = originalText;
+              footerSubscribeBtn.style.background = '';
+            }, 2500);
+          }
+          if (footerEmailInput) footerEmailInput.value = '';
+          if (hasGSAP && footerSubscribeBtn) {
+            gsap.fromTo(footerSubscribeBtn, { scale: 0.93 }, { scale: 1, duration: 0.4, ease: 'elastic.out(1.4, 0.4)' });
+          }
+        });
+      }
+
+      // 4. Minimal Smooth Preloader Controller
+      const cluePreloader = document.getElementById('cluePreloader');
+      const preloaderFill = document.getElementById('preloaderFill');
+
+      let preloaderDismissed = false;
+
+      function dismissPreloader() {
+        if (preloaderDismissed) return;
+        preloaderDismissed = true;
+
+        if (cluePreloader) {
+          if (hasGSAP) {
+            gsap.to(cluePreloader, {
+              opacity: 0,
+              duration: 0.35,
+              ease: 'power2.out',
+              onComplete: () => {
+                cluePreloader.style.display = 'none';
+                document.body.classList.remove('is-loading');
+                if (heroTl) heroTl.play();
+              }
+            });
+          } else {
+            cluePreloader.classList.add('fade-out');
+            setTimeout(() => {
+              cluePreloader.style.display = 'none';
+              document.body.classList.remove('is-loading');
+              if (heroTl) heroTl.play();
+            }, 350);
+          }
+        } else {
+          document.body.classList.remove('is-loading');
+          if (heroTl) heroTl.play();
+        }
+      }
+
+      if (cluePreloader && preloaderFill) {
+        let currentPct = 0;
+        const progressInterval = setInterval(() => {
+          currentPct = Math.min(100, currentPct + 18);
+          preloaderFill.style.width = currentPct + '%';
+
+          if (currentPct >= 100) {
+            clearInterval(progressInterval);
+            setTimeout(dismissPreloader, 80);
+          }
+        }, 35);
+
+        setTimeout(dismissPreloader, 650);
+      } else {
+        document.body.classList.remove('is-loading');
+        if (heroTl) heroTl.play();
       }
     })();
   </script>

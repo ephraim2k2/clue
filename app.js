@@ -17,11 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
       winRate: '88.4%',
       difficultyStars: 5,
       players: '1v1 & Solo Arena',
-      image: 'assets/card3.png',
+      image: 'assets/card3.jpg',
       color: '#f59e0b',
       desc: 'Clue\'s lightning-fast arithmetic arena. Race against the clock and live opponents to solve rapid-fire math, equations, and number sequences under three-life tournament pressure.',
-      heroTop: 'SPEED MATH.',
-      heroBottom: '<span class="hero-line hero-line-compete">MENTAL ARITHMETIC.</span> <span class="hero-line hero-line-quest"><span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.</span>',
+      heroTop: 'Speed Math',
+      heroBottom: '<span class="hero-line hero-line-compete">Mental arithmetic.</span> <span class="hero-line hero-line-quest">Race the clock.</span>',
       heroSub: 'Lightning-fast calculations, arithmetic drills, and numbers challenges under the tension of a three-life countdown.'
     },
     seer: {
@@ -33,11 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
       winRate: '84.1%',
       difficultyStars: 4,
       players: 'Party & Multiplayer',
-      image: 'assets/card2.png',
+      image: 'assets/card2.jpg',
       color: '#06b6d4',
       desc: 'Inspect suspicious emails, malicious links, deceptive SMS alerts, and social engineering attacks. Train your eye to detect red flags and protect digital assets in real time.',
-      heroTop: 'PHISH HUNTER.',
-      heroBottom: '<span class="hero-line hero-line-compete">CYBER AWARENESS.</span> <span class="hero-line hero-line-quest"><span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.</span>',
+      heroTop: 'Phish Hunter',
+      heroBottom: '<span class="hero-line hero-line-compete">Cyber defense.</span> <span class="hero-line hero-line-quest">Spot the scam.</span>',
       heroSub: 'Identify phishing lures, fake websites, and deceptive scams with sharp forensic analysis and real-world scenario drills.'
     },
     oldman: {
@@ -49,11 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
       winRate: '82.5%',
       difficultyStars: 4,
       players: 'Diagnostic & Revision',
-      image: 'assets/card1.png',
+      image: 'assets/card1.jpg',
       color: '#10b981',
       desc: 'Master the geography of Nigeria from the Sahel to the Niger Delta. Explore state capitals, ethnic heritage, national landmarks, topography, and geopolitical zones in fast-paced blitz rounds.',
-      heroTop: 'GEO NIGERIA.',
-      heroBottom: '<span class="hero-line hero-line-compete">36 STATES BLITZ.</span> <span class="hero-line hero-line-quest"><span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.</span>',
+      heroTop: 'Geo Nigeria',
+      heroBottom: '<span class="hero-line hero-line-compete">36 States blitz.</span> <span class="hero-line hero-line-quest">Map the nation.</span>',
       heroSub: 'Explore Nigeria\'s 36 states, historical landmarks, mineral resources, and geopolitical zones in an interactive cartographic quest.'
     },
     witch: {
@@ -65,11 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
       winRate: '85.2%',
       difficultyStars: 4,
       players: 'Executive Arena',
-      image: 'assets/card4.png',
+      image: 'assets/card4.jpg',
       color: '#a855f7',
       desc: 'Unlock business acumen and financial literacy. Test your knowledge of venture capital, stock markets, budgeting, corporate leadership, and wealth generation strategies.',
-      heroTop: 'NEXT LEVEL ACCESS.',
-      heroBottom: '<span class="hero-line hero-line-compete">BUSINESS & FINANCE.</span> <span class="hero-line hero-line-quest"><span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.</span>',
+      heroTop: 'Next Level Access',
+      heroBottom: '<span class="hero-line hero-line-compete">Business &amp; finance.</span> <span class="hero-line hero-line-quest">Master markets.</span>',
       heroSub: 'Master capital allocation, corporate finance, market dynamics, and leadership strategy to unlock elite access.'
     },
     hunter: {
@@ -81,11 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
       winRate: '79.0%',
       difficultyStars: 5,
       players: 'Live Arenas & Derbies',
-      image: 'assets/card5.png',
+      image: 'assets/card5.jpg',
       color: '#3b82f6',
       desc: 'Step into frontline defensive cybersecurity. Intercept zero-day exploits, configure security shields, crack encryption challenges, and safeguard African critical infrastructure.',
-      heroTop: 'CYBER PULSE.',
-      heroBottom: '<span class="hero-line hero-line-compete">ZERO-DAY DEFENSE.</span> <span class="hero-line hero-line-quest"><span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.</span>',
+      heroTop: 'Cyber Pulse',
+      heroBottom: '<span class="hero-line hero-line-compete">Zero-day arena.</span> <span class="hero-line hero-line-quest">Shield the grid.</span>',
       heroSub: 'Shield networks against live digital threats, neutralize zero-day vulnerabilities, and lead cyber defense operations.'
     }
   };
@@ -110,32 +110,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // =========================================================================
   // Background Audio Controller (assets/gigidelaromusic-calm-ether-loop-short-450954.mp3)
-  // Default: OFF / Silent. Controlled only by user toggle.
+  // Default: Sound enabled by default. Plays smoothly on user interaction.
   // =========================================================================
   const bgAudio = document.getElementById('bgAudio');
-  let musicEnabled = false;
-  let isManuallyPaused = true;
+  let musicEnabled = true;
+  let isManuallyPaused = false;
 
   if (bgAudio) {
-    bgAudio.pause();
     bgAudio.currentTime = 0;
-    bgAudio.loop = false;
-    bgAudio.volume = 0.50;
-
-    bgAudio.addEventListener('play', () => {
-      updateSoundUI();
-    });
-
-    bgAudio.addEventListener('pause', () => {
-      updateSoundUI();
-    });
+    bgAudio.loop = true;
+    bgAudio.volume = 0.40;
 
     bgAudio.addEventListener('ended', () => {
       if (musicEnabled && !isManuallyPaused) {
         bgAudio.currentTime = 0;
         bgAudio.play().catch(() => {});
-      } else {
-        updateSoundUI();
       }
     });
   }
@@ -144,16 +133,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!bgAudio) return;
     musicEnabled = true;
     isManuallyPaused = false;
-    bgAudio.volume = 0.50;
+    bgAudio.volume = 0.40;
     bgAudio.loop = true;
 
     const playPromise = bgAudio.play();
     if (playPromise !== undefined) {
-      playPromise.then(() => {
-        updateSoundUI();
-      }).catch(() => {
-        updateSoundUI();
-      });
+      playPromise.catch(() => {});
     }
   }
 
@@ -163,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
     musicEnabled = false;
     bgAudio.pause();
     bgAudio.currentTime = 0;
-    updateSoundUI();
   }
 
   function toggleSoundAndMusic() {
@@ -737,14 +721,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Master Intro Dealing & Entrance Timeline
+  let introTl = null;
   if (hasGSAP) {
-    const introTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    introTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     // 1. Floating Capsule Navbar drops in smoothly
-    introTl.from('.navbar', {
+    introTl.fromTo('.navbar', {
       y: -42,
-      opacity: 0,
-      duration: 0.9
+      opacity: 0
+    }, {
+      y: 0,
+      opacity: 1,
+      duration: 0.9,
+      clearProps: 'opacity,transform'
     });
 
     // 2. Floating Witch & Cauldron pop in with spring elasticity
@@ -766,12 +755,24 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: 'power4.out'
     }, '-=0.6');
 
-    // 4. Hero Subtitle glides up
-    introTl.from('#heroSubtitle', {
-      y: 18,
-      opacity: 0,
-      duration: 0.75
-    }, '-=0.5');
+    // 4. Hero Subtitle & Action Buttons
+    if (heroSubtitle) {
+      introTl.from('#heroSubtitle', {
+        y: 18,
+        opacity: 0,
+        duration: 0.75
+      }, '-=0.5');
+    }
+    const heroActionsGroup = document.getElementById('heroActionsGroup');
+    if (heroActionsGroup) {
+      introTl.from(heroActionsGroup, {
+        y: 20,
+        opacity: 0,
+        scale: 0.95,
+        duration: 0.7,
+        ease: 'power3.out'
+      }, '-=0.45');
+    }
 
     // 5. Epic Fanned Cards Dealing Sequence (deals like real game cards)
     cards.forEach((card, idx) => {
@@ -799,72 +800,76 @@ document.addEventListener('DOMContentLoaded', () => {
     }, '-=0.5');
   }
 
-  // Dynamic Hero Headline Morphing per Card
-  const DEFAULT_HERO = {
-    top: 'THINK. PLAY. CONNECT.',
-    bottom: '<span class="hero-line hero-line-compete">COMPETE. WIN.</span> <span class="hero-line hero-line-quest"><span class="hero-word-knowledge">KN<span class="target-o">O</span>WLEDGE</span> QUEST.</span>',
-    sub: 'The knowledge, gaming, entertainment &amp; social platform built around a simple idea: learning should happen without feeling like studying. Turn knowledge into an experience.'
-  };
+  // =========================================================================
+  // Minimal Smooth Preloader Controller
+  // =========================================================================
+  const cluePreloader = document.getElementById('cluePreloader');
+  const preloaderFill = document.getElementById('preloaderFill');
 
-  let heroMorphTimeout = null;
-  function activateHeroHeadline(roleKey) {
-    const role = ROLES[roleKey];
-    if (!role || !heroTitleTop || !heroTitleBottom) return;
-    clearTimeout(heroMorphTimeout);
+  let preloaderDismissed = false;
 
-    if (hasGSAP) {
-      gsap.to(['#heroTitleTop', '#heroTitleBottom', '#heroSubtitle'], {
-        opacity: 0.2,
-        y: -3,
-        duration: 0.14,
-        ease: 'power2.in',
-        onComplete: () => {
-          heroTitleTop.textContent = role.heroTop;
-          heroTitleBottom.innerHTML = role.heroBottom;
-          if (heroSubtitle) heroSubtitle.textContent = role.heroSub;
-          gsap.to(['#heroTitleTop', '#heroTitleBottom', '#heroSubtitle'], {
-            opacity: 1,
-            y: 0,
-            duration: 0.25,
-            ease: 'power2.out'
-          });
-        }
-      });
-    } else {
-      heroTitleTop.textContent = role.heroTop;
-      heroTitleBottom.innerHTML = role.heroBottom;
-      if (heroSubtitle) heroSubtitle.textContent = role.heroSub;
-    }
-  }
+  function dismissPreloader() {
+    if (preloaderDismissed) return;
+    preloaderDismissed = true;
 
-  function resetHeroHeadline() {
-    clearTimeout(heroMorphTimeout);
-    heroMorphTimeout = setTimeout(() => {
-      if (!heroTitleTop || !heroTitleBottom) return;
+    if (cluePreloader) {
       if (hasGSAP) {
-        gsap.to(['#heroTitleTop', '#heroTitleBottom', '#heroSubtitle'], {
-          opacity: 0.2,
-          y: 3,
-          duration: 0.14,
-          ease: 'power2.in',
+        gsap.to(cluePreloader, {
+          opacity: 0,
+          duration: 0.35,
+          ease: 'power2.out',
           onComplete: () => {
-            heroTitleTop.textContent = DEFAULT_HERO.top;
-            heroTitleBottom.innerHTML = DEFAULT_HERO.bottom;
-            if (heroSubtitle) heroSubtitle.innerHTML = DEFAULT_HERO.sub;
-            gsap.to(['#heroTitleTop', '#heroTitleBottom', '#heroSubtitle'], {
-              opacity: 1,
-              y: 0,
-              duration: 0.25,
-              ease: 'power2.out'
-            });
+            cluePreloader.style.display = 'none';
+            document.body.classList.remove('is-loading');
+            if (introTl) introTl.play();
           }
         });
       } else {
-        heroTitleTop.textContent = DEFAULT_HERO.top;
-        heroTitleBottom.innerHTML = DEFAULT_HERO.bottom;
-        if (heroSubtitle) heroSubtitle.innerHTML = DEFAULT_HERO.sub;
+        cluePreloader.classList.add('fade-out');
+        setTimeout(() => {
+          cluePreloader.style.display = 'none';
+          document.body.classList.remove('is-loading');
+          if (introTl) introTl.play();
+        }, 350);
       }
-    }, 160);
+    } else {
+      document.body.classList.remove('is-loading');
+      if (introTl) introTl.play();
+    }
+  }
+
+  if (cluePreloader && preloaderFill) {
+    let currentPct = 0;
+    const progressInterval = setInterval(() => {
+      currentPct = Math.min(100, currentPct + 18);
+      preloaderFill.style.width = currentPct + '%';
+
+      if (currentPct >= 100) {
+        clearInterval(progressInterval);
+        setTimeout(dismissPreloader, 80);
+      }
+    }, 35);
+
+    // Safety timeout: Dismiss preloader quickly within 650ms
+    setTimeout(dismissPreloader, 650);
+  } else {
+    document.body.classList.remove('is-loading');
+    if (introTl) introTl.play();
+  }
+
+  // Hero Headline is static — clicking or hovering cards will not alter the landing text
+  const DEFAULT_HERO = {
+    top: 'Where Knowledge Meets Gaming.',
+    bottom: '<span class="hero-line hero-line-compete">Play Smart.</span> <span class="hero-line hero-line-quest">Win Real Rewards.</span>',
+    sub: 'The competitive trivia and curriculum gaming platform where practice feels like play. Challenge rivals, beat the 3-life clock, and turn what you know into real rewards.'
+  };
+
+  function activateHeroHeadline(roleKey) {
+    // Disabled: Hero text stays stable
+  }
+
+  function resetHeroHeadline() {
+    // Disabled: Hero text stays stable
   }
 
   // Tactile Interactive Hover & 3D Tilt per Card (Smooth & Fluid)
@@ -1440,7 +1445,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // Sign Up Button (Navbar)
+  // Sign Up Button (Navbar & Hero Action Buttons)
   // =========================================================================
   const navSignupBtn = document.getElementById('navSignupBtn');
   if (navSignupBtn) {
@@ -1451,6 +1456,29 @@ document.addEventListener('DOMContentLoaded', () => {
         cta.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
       triggerToast('Welcome to Clue! Registration opened for Smart Educational Games.');
+    });
+  }
+
+  const heroSignupBtn = document.getElementById('heroSignupBtn');
+  if (heroSignupBtn) {
+    heroSignupBtn.addEventListener('click', () => {
+      playSwitchSnap();
+      const cta = document.getElementById('finalCtaSection');
+      if (cta) {
+        cta.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      triggerToast('Welcome to Clue! Registration opened for Smart Educational Games.');
+    });
+  }
+
+  const heroExploreBtn = document.getElementById('heroExploreBtn');
+  if (heroExploreBtn) {
+    heroExploreBtn.addEventListener('click', () => {
+      playSwitchSnap();
+      const exploreTarget = document.getElementById('platformOverview') || document.getElementById('cardsShowcase');
+      if (exploreTarget) {
+        exploreTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   }
 
@@ -1485,24 +1513,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // Persistent Autoplay Unlock & Sound Toggle Button
+  // Persistent Autoplay Unlock & Sound Initialization
+  // All website sound & ambient music are enabled by default on first user touch/click.
   // =========================================================================
   const unlockAudioOnGesture = () => {
     initAudio();
+    if (bgAudio && bgAudio.paused && !isManuallyPaused) {
+      startAmbientMusic();
+    }
   };
 
   ['pointerdown', 'touchstart', 'click', 'keydown'].forEach((evt) => {
     document.addEventListener(evt, unlockAudioOnGesture, { once: true, passive: true });
   });
-
-  const soundToggleBtn = document.getElementById('soundToggleBtn');
-  if (soundToggleBtn) {
-    updateSoundUI();
-    soundToggleBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleSoundAndMusic();
-    });
-  }
 
   // =========================================================================
   // Reference Overlay Toggle
@@ -1743,11 +1766,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const footerNewsletterForm = document.getElementById('footerNewsletterForm');
+  const footerEmailInput = document.getElementById('footerEmailInput');
   const footerSubscribeBtn = document.getElementById('footerSubscribeBtn');
-  if (footerSubscribeBtn) {
+  if (footerNewsletterForm) {
+    footerNewsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = footerEmailInput ? footerEmailInput.value.trim() : '';
+      if (!email) return;
+      playCoinChime();
+      triggerToast(`Thanks for subscribing! Check ${email} for updates. +500 XP`);
+      if (footerEmailInput) footerEmailInput.value = '';
+      if (hasGSAP && footerSubscribeBtn) {
+        gsap.fromTo(footerSubscribeBtn, { scale: 0.93 }, { scale: 1, duration: 0.4, ease: 'elastic.out(1.4, 0.4)' });
+      }
+    });
+  } else if (footerSubscribeBtn) {
     footerSubscribeBtn.addEventListener('click', () => {
       playCoinChime();
-      triggerToast('Subscribed to The Clue Intel Dispatch! +500 XP');
+      triggerToast('Thanks for subscribing to our newsletter! +500 XP');
       if (hasGSAP) {
         gsap.fromTo(footerSubscribeBtn, { scale: 0.93 }, { scale: 1, duration: 0.4, ease: 'elastic.out(1.4, 0.4)' });
       }
@@ -1804,6 +1841,67 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (action === 'interview') {
         jumpToGameEngine('movies', 'Loaded Daily Streak Challenge on the Game Stage!');
       }
+    });
+  });
+
+  // =========================================================================
+  // Section 2: Editorial Deck Controller & Interactive Cards
+  // =========================================================================
+  const editorialCards = document.querySelectorAll('.editorial-card');
+  const deckNavUp = document.getElementById('deckNavUp');
+  const deckNavDown = document.getElementById('deckNavDown');
+  let currentEditorialIndex = 0;
+
+  function setEditorialCardActive(index) {
+    if (!editorialCards.length) return;
+    const total = editorialCards.length;
+    currentEditorialIndex = (index + total) % total;
+
+    editorialCards.forEach((card, idx) => {
+      const isActive = idx === currentEditorialIndex;
+      card.classList.toggle('is-active', isActive);
+
+      if (isActive) {
+        card.style.zIndex = '30';
+        if (window.innerWidth > 900) {
+          card.style.transform = 'translateY(-14px) scale(1.02)';
+        }
+      } else {
+        const diff = (idx - currentEditorialIndex + total) % total;
+        card.style.zIndex = String(10 - diff);
+        if (window.innerWidth > 900) {
+          card.style.transform = 'translateY(0) scale(1)';
+        }
+      }
+    });
+
+    if (window.innerWidth <= 1200 && editorialCards[currentEditorialIndex]) {
+      editorialCards[currentEditorialIndex].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
+      });
+    }
+  }
+
+  if (deckNavUp) {
+    deckNavUp.addEventListener('click', (e) => {
+      e.preventDefault();
+      setEditorialCardActive(currentEditorialIndex - 1);
+    });
+  }
+
+  if (deckNavDown) {
+    deckNavDown.addEventListener('click', (e) => {
+      e.preventDefault();
+      setEditorialCardActive(currentEditorialIndex + 1);
+    });
+  }
+
+  editorialCards.forEach((card, idx) => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.pillar-btn') || e.target.closest('button')) return;
+      setEditorialCardActive(idx);
     });
   });
 
@@ -1959,7 +2057,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  let activeLibraryKey = 'music';
+  let activeLibraryKey = 'duels';
   let libraryAnswered = false;
 
   function renderLibraryOptions(engineKey) {
@@ -2558,7 +2656,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pillarCards.length) {
       gsap.from(pillarCards, {
         scrollTrigger: {
-          trigger: '#pillarsSection .pillars-grid',
+          trigger: '#pillarsSection',
           start: 'top 82%',
           toggleActions: 'play none none none'
         },
